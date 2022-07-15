@@ -38,7 +38,6 @@ class Category(models.Model):
 class Manufacturer(models.Model):
     manufacturer_name = models.CharField(max_length=255)
 
-
     def __str__(self):
         return self.manufacturer_name
 

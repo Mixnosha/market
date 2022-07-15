@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from environment_variables import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -74,13 +76,20 @@ WSGI_APPLICATION = 'main_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'market_db',
-        'USER': 'market_mixnosha',
-        'PASSWORD': 'Maksim21z',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
+
+
+# 'NAME': 'market_db',
+#         'USER': 'market_mixnosha',
+#         'PASSWORD': 'Maksim21z',
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
