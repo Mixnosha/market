@@ -14,8 +14,11 @@ class Product(models.Model):
 
 
 class Review(models.Model):
+    RATING_CHOICES = [
+        (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)
+    ]
     review_user = models.CharField(max_length=100)
-    review_rating = models.IntegerField()
+    review_rating = models.IntegerField(choices=RATING_CHOICES)
     review_description = models.TextField(blank=True)
     review_image = models.ImageField(upload_to='users/review_images', blank=True)
 
