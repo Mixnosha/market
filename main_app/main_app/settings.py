@@ -73,17 +73,27 @@ WSGI_APPLICATION = 'main_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': DB_NAME,
+#         'USER': DB_USER,
+#         'PASSWORD': DB_PASSWORD,
+#         'HOST': DB_HOST,
+#         'PORT': DB_PORT,
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'NAME': 'market_db',
+        'USER': 'market_mixnosha',
+        'PASSWORD': 'Maksim21z',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
-
 
 # 'NAME': 'market_db',
 #         'USER': 'market_mixnosha',

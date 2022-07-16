@@ -18,8 +18,11 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
+from market.views import ProductView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', ProductView.as_view(), name='product-view'),
 
 ]
 if settings.DEBUG:

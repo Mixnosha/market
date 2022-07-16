@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name_page}}</title>
+</head>
+<body>
+{% for product in product_list %}
+    <label>{{product.product_name}}</label><br>
+    <label>{{product.product_price}}</label><br>
+    <label>{{product.product_description}}</label><br>
+    <label>{{product.product_manufacturer}}</label><br>
+    <img src="{{product.product_image.url}}">
+    <br><br>
+{% endfor %}
+</body>
+</html>
