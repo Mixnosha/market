@@ -7,10 +7,8 @@
 <body>
 {% for product in product_list %}
     <label>{{product.product_name}}</label><br>
-    <label>{{product.product_price}}</label><br>
-    <label>{{product.product_description}}</label><br>
-    <label>{{product.product_manufacturer}}</label><br>
-    <img src="{{product.product_image.url}}">
+    <label>{{product.product_price}}$</label><br>
+    <img src="{{product.product_image.url}}" width="100" height="100">
     <br><br>
 {% endfor %}
 </body>
