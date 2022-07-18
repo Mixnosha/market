@@ -43,12 +43,11 @@
   </div>
 </div>
 
-            <form  method="post" action="{{main_page}}">
+            <form  method="post" action="{% url 'main_page' %}">
               {% csrf_token %}
               <input type="text" name=text" class="search" placeholder="Search here!">
               <input type="submit" name="submit" class="submit" value="Search">
             </form>
-
           </nav>
         </div>
       </div>
