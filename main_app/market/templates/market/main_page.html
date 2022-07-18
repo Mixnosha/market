@@ -7,8 +7,12 @@
 {% endblock %}
 
 {% block content %}
+    {% if not search %}
     <h1 class="hot">HOT</h1><br>
     <span class="description">This includes products whose sales exceed 100</span><br>
+    {% else %}
+        <span class="search_res">Search results:</span><br>
+    {% endif %}
     {% for product in product_list %}
          <div class="product">
             <a href="">{{product.product_name}}</a><br>

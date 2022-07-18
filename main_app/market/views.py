@@ -1,10 +1,5 @@
-from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import ListView, FormView
-from django.views.generic.detail import SingleObjectMixin
-
+from django.views.generic import ListView
 from market.forms import SearchForm
 from market.models import Product, Category
 
@@ -27,6 +22,8 @@ class ProductView(ListView, View):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.GET:
+            context['search'] = True
         context['name_page'] = 'market'
         context['category'] = Category.objects.all()
         return context

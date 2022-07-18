@@ -24,3 +24,11 @@ h1{
     margin-left: 120px;
     text-align: left;
 }
+
+.search_res{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 50px;
+    font-size: 24px;
+    color: gray;
+}
