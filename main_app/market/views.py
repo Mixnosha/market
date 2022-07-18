@@ -6,10 +6,13 @@ from market.models import Product, Category
 
 
 class ProductView(ListView):
-    model = Product
     paginate_by = 100
     context_object_name = 'product_list'
-    template_name = 'market/base.html'
+    template_name = 'market/main_page.html'
+
+    def get_queryset(self):
+        queryset = Product.objects.filter(sales__gte=100)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

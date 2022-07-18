@@ -9,6 +9,7 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='users/product_images')
     availability = models.BooleanField(default=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    sales = models.IntegerField()
 
     def __str__(self):
         return self.product_name

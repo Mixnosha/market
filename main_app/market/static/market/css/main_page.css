@@ -1,9 +1,11 @@
-.cat_name{
-    color: #e5b416;
-    font-size: 44px;
-    margin-left: 70px;
+.hot{
+    color: red;
+    margin-left: 120px;
 }
 
+h1{
+    margin-bottom: 5px;
+}
 .product {
      float: left; /*Задаем обтекание*/
      line-height: 50px;/*Высота строки +  верт. центрирования текста*/
@@ -15,3 +17,10 @@
      margin-right: 10px;
      text-align: center; /*Центрируем текст по горизонтали*/
     }
+
+.description{
+    color: darkgray;
+    font-size: 18px;
+    margin-left: 120px;
+    text-align: left;
+}

@@ -1,0 +1,20 @@
+{% extends 'market/base.html' %}
+{% load static %}
+
+
+{% block head %}
+  <link type="text/css"  href="{% static 'market/css/main_page.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+    <h1 class="hot">HOT</h1><br>
+    <span class="description">This includes products whose sales exceed 100</span><br>
+    {% for product in product_list %}
+         <div class="product">
+            <a href="">{{product.product_name}}</a><br>
+            <a href=""><img src="{{product.product_image.url}}" width="200px" height="120px"/></a><br>
+            <span>{{product.product_price}}$</span><br>
+             <span>sales: {{product.sales}}</span>
+        </div>
+    {% endfor %}
+{% endblock %}
