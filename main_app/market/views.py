@@ -1,19 +1,28 @@
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic import ListView, FormView
+from django.views.generic.detail import SingleObjectMixin
 
 from market.forms import SearchForm
 from market.models import Product, Category
 
 
-class ProductView(ListView):
+class ProductView(ListView, View):
     paginate_by = 100
     context_object_name = 'product_list'
+    form_class = SearchForm
     template_name = 'market/main_page.html'
     name_url = 'main_page'
+    success_url = '/'
 
     def get_queryset(self):
-        queryset = Product.objects.filter(sales__gte=100)
+        if self.request.GET:
+            text_search = self.request.GET.get('text_search')
+            queryset = Product.objects.filter(product_name__icontains=text_search)
+        else:
+            queryset = Product.objects.filter(sales__gte=100)
         return queryset
 
     def get_context_data(self, **kwargs):
