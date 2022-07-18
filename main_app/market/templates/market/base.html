@@ -13,8 +13,6 @@
       rel="stylesheet"
     />
     <link type="text/css"  href="{% static 'market/css/base.css' %}" rel="stylesheet" />
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="static/market/js/base.js"></script>
     <title>{{title}}</title>
   </head>
   <body>
@@ -34,10 +32,28 @@
             {% for m in menu %}
                 <div class="navlink"><a href="{{m.url_name }}" class="navanim">{{m.title}}</a></div>
             {% endfor %}
+            <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Category</button>
+  <div id="myDropdown" class="dropdown-content">
+    {% for cat in category %}
+    <a href="#">{{cat}}</a>
+    {% endfor %}
+  </div>
+</div>
+
+            <form  method="post" action="{{main_page}}">
+              {% csrf_token %}
+              <input type="text" name=text" class="search" placeholder="Search here!">
+              <input type="submit" name="submit" class="submit" value="Search">
+            </form>
+
           </nav>
         </div>
       </div>
     </header>
+
+
+
 
   {% endblock mainmenu %}
 
@@ -46,3 +62,7 @@
   </div>
   </body>
 </html>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="{% static 'market/js/base.js'%}"></script>

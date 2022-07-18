@@ -77,271 +77,48 @@ a {
   width: 100%;
 }
 
-/* ____________________________Content__________________________
----------------------------------------------------------------
---------------------------------------------------------------- */
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  height: 446px;
-  width: auto;
-  margin-top: 120px;
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    color: #e5b416;
 }
 
-.content_text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-.welcome {
-  font-size: 52px;
-  font-weight: 300;
+.dropbtn{
+  border:none;
+padding:0;
+margin:2px;
+color: rgba(118, 161, 83, 1);
+  font-size: 18px;
+background-color:transparent;
 }
 
-.content_logo {
-  font-size: 52px;
-  font-weight: 600;
-  color: rgba(86, 116, 61, 1);
-  margin-top: 10px;
-  margin-bottom: 15px;
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
-.content_button {
-  background-color: white;
-  font-size: 20px;
-  font-weight: 300;
-  border-radius: 20px;
-  width: 180px;
-  height: 53px;
-  border: 1px solid #76a153;
-  transition: 0.3s;
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
-.content_button:hover {
-  box-shadow: 0 5px 5px grey;
-  color: #eeecee;
-  background-color: #76a153;
-  cursor: pointer;
-}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
 
-/* ____________________________About__________________________
----------------------------------------------------------------
---------------------------------------------------------------- */
-
-.about {
-  display: flex;
-  height: 100vh;
-  width: auto;
-  background-color: rgb(255, 255, 255);
-  align-items: center;
-}
-.about_photo {
-  height: 100vh;
-}
-
-.about_photo img {
-  box-sizing: border-box;
-  height: 100%;
-  width: auto;
-}
-
-.about_text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.about_us {
-  margin-left: 108px;
-  margin-right: 136px;
-  margin-bottom: 10px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 51px;
-  line-height: 154.02%;
-  color: #ee736a;
-}
-
-.about_us_text {
-  margin-left: 91px;
-  margin-right: 75px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 23px;
-  line-height: 186.02%;
-  color: black;
-}
-
-/* ======================CONTACTS================================ */
-
-.contacts {
-  background: url(/static/vegetables/images/Contacts_photo.jpg);
-  background-size: cover;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.contacts_container {
-  width: 1184px;
-  height: 405px;
-  background-color: #56743d;
-  opacity: 95%;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0 80px;
-}
-
-.contacts_container_header {
-  background-color: #76a153;
-  width: 1184px;
-  height: 80px;
-  border-radius: 38px;
-  top: 40px;
-  position: relative;
-  z-index: 2;
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-}
-.contacts_inner {
-  display: flex;
-  flex-direction: column;
-}
-
-.signup {
-  display: flex;
-  width: 512px;
-  margin-left: 80px;
-  align-items: center;
-}
-
-.signup_text {
-  font-weight: 600;
-  color: #fff;
-  font-size: 22px;
-  margin-left: 18px;
-}
-
-.subscribe {
-  display: flex;
-  width: 512px;
-  margin-right: 80px;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.subscribe_input {
-  width: 318px;
-  height: 46px;
-  border: none;
-  border-radius: 39px;
-  color: #000000;
-  font-weight: 300;
-  font-size: 20px;
-  box-sizing: border-box;
-  padding-left: 15px;
-}
-input {
-  outline: none;
-}
-
-.subscribe_btn {
-  height: 46px;
-  width: 184px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 46px;
-  background-color: #56743d;
-  color: white;
-  font-family: "Sen", sans-serif;
-  font-size: 20px;
-  font-weight: 900;
-  border: none;
-  cursor: pointer;
-}
-
-.vertical_line {
-  display: block;
-  width: 2px;
-  height: 278px;
-  background-color: white;
-  margin-top: 44px;
-}
-
-.location {
-  display: flex;
-  flex-direction: column;
-  width: 512px;
-  height: 227px;
-  justify-content: left;
-  font-family: "Sen", sans-serif;
-  font-weight: 700;
-  color: white;
-  margin-top: 42px;
-}
-.location h2 {
-  font-size: 30px;
-  margin: 0;
-  margin-bottom: 44px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-.location_list {
-  margin: 0;
-}
-
-.location_list_el {
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.location_list_el a {
-  display: flex;
-  align-items: center;
-  /* margin-bottom: 16px; */
-}
-
-.location_list_el_text {
-  font-family: "Sen", sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  margin-left: 20px;
-  top: -4px;
-  position: relative;
-}
-
-.connect {
-  display: flex;
-  flex-direction: column;
-  width: 512px;
-  height: 227px;
-  justify-content: left;
-  font-family: "Sen", sans-serif;
-  font-weight: 700;
-  color: white;
-  margin-top: 42px;
-  margin-left: 80px;
-}
-
-.connect h2 {
-  font-size: 30px;
-  margin: 0;
-  margin-bottom: 44px;
-}
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}

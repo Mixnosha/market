@@ -22,7 +22,7 @@ from market.views import ProductView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', ProductView.as_view(), name='product-view'),
+    path('', ProductView.as_view(), name='main_page'),
 
 ]
 if settings.DEBUG:
