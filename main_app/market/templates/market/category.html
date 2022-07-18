@@ -1,0 +1,8 @@
+
+{% extends 'market/base.html' %}
+
+{% block content %}
+    {% for cat in category_list %}
+        <a href="">{{cat.product_name}}</a>
+    {% endfor%}
+{% endblock %}

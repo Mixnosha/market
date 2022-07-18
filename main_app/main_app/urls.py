@@ -18,11 +18,12 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from market.views import ProductView
+from market.views import ProductView, CategoryView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ProductView.as_view(), name='main_page'),
+    path('category/<int:cat_id>', CategoryView.as_view(), name='cats_view')
 
 ]
 if settings.DEBUG:

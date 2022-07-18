@@ -16,3 +16,15 @@ class ProductView(ListView):
         context['name_page'] = 'market'
         context['category'] = Category.objects.all()
         return context
+
+
+class CategoryView(ListView):
+    template_name = 'market/category.html'
+    paginate_by = 25
+    context_object_name = 'category_list'
+
+    def get_queryset(self):
+        cat_id = self.kwargs["cat_id"]
+        print(cat_id)
+        queryset = Product.objects.filter(category=cat_id)
+        return queryset
