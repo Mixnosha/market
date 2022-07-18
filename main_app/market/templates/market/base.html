@@ -12,6 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
+    {% block head %}
+    {% endblock %}
     <link type="text/css"  href="{% static 'market/css/base.css' %}" rel="stylesheet" />
     <title>{{title}}</title>
   </head>
@@ -36,7 +38,7 @@
   <button onclick="myFunction()" class="dropbtn">Category</button>
   <div id="myDropdown" class="dropdown-content">
     {% for cat in category %}
-    <a href="category/{{cat.id}}">{{cat}}</a>
+    <a href="category/{{cat.slug}}">{{cat}}</a>
     {% endfor %}
   </div>
 </div>

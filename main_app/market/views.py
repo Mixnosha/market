@@ -24,7 +24,14 @@ class CategoryView(ListView):
     context_object_name = 'category_list'
 
     def get_queryset(self):
-        cat_id = self.kwargs["cat_id"]
-        print(cat_id)
-        queryset = Product.objects.filter(category=cat_id)
+        slug = self.kwargs["slug"]
+        print(slug)
+        queryset = Product.objects.filter(category__slug=slug)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryView, self).get_context_data(**kwargs)
+        slug = self.kwargs["slug"]
+        cat = Category.objects.get(slug=slug)
+        context['name_category'] = cat
+        return context

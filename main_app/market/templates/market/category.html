@@ -1,8 +1,15 @@
-
 {% extends 'market/base.html' %}
-
+{% load static %}
+{% block head %}
+        <link type="text/css"  href="{% static 'market/css/category.css' %}" rel="stylesheet" />
+{% endblock %}
 {% block content %}
+    <span class="cat_name">Category: {{name_category}}</span><br>
     {% for cat in category_list %}
-        <a href="">{{cat.product_name}}</a>
+        <div class="product">
+            <a href="">{{cat.product_name}}</a><br>
+            <a href=""><img src="{{cat.product_image.url}}" width="100px" height="100px"/></a><br>
+            <span>{{cat.product_price}}$</span>
+        </div>
     {% endfor%}
 {% endblock %}

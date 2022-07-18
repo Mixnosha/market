@@ -23,7 +23,7 @@ from market.views import ProductView, CategoryView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ProductView.as_view(), name='main_page'),
-    path('category/<int:cat_id>', CategoryView.as_view(), name='cats_view')
+    path('category/<slug:slug>', CategoryView.as_view(), name='cats_view')
 
 ]
 if settings.DEBUG:
