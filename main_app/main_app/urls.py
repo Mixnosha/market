@@ -18,12 +18,13 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from market.views import ProductView, CategoryView
+from market.views import ProductView, CategoryView, OneProductView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ProductView.as_view(), name='main_page'),
-    path('category/<slug:slug>', CategoryView.as_view(), name='cats_view')
+    path('category/<slug:slug>', CategoryView.as_view(), name='cats_view'),
+    path('product/<slug:slug>', OneProductView.as_view(), name='one_product')
 
 ]
 if settings.DEBUG:

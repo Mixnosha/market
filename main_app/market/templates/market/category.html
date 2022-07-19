@@ -7,8 +7,8 @@
     <span class="cat_name">Category: {{name_category}}</span><br>
     {% for cat in category_list %}
         <div class="product">
-            <a href="">{{cat.product_name}}</a><br>
-            <a href=""><img src="{{cat.product_image.url}}" width="200px" height="120px"/></a><br>
+            <a href="/product/{{cat.slug}}">{{cat.product_name}}</a><br>
+            <a href="/product/{{cat.slug}}"><img src="{{cat.product_image.url}}" width="200px" height="120px"/></a><br>
             <span>{{cat.product_price}}$</span>
         </div>
     {% endfor%}

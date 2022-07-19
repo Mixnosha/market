@@ -15,8 +15,8 @@
     {% endif %}
     {% for product in product_list %}
          <div class="product">
-            <a href="">{{product.product_name}}</a><br>
-            <a href=""><img src="{{product.product_image.url}}" width="200px" height="120px"/></a><br>
+            <a href="/product/{{product.slug}}">{{product.product_name}}</a><br>
+            <a href="/product/{{product.slug}}"><img src="{{product.product_image.url}}" width="200px" height="120px"/></a><br>
             <span>{{product.product_price}}$</span><br>
              <span>sales: {{product.sales}}</span>
         </div>

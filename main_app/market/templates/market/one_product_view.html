@@ -1,0 +1,23 @@
+{% extends 'market/base.html' %}
+{% load static %}
+
+{% block head %}
+  <link type="text/css"  href="{% static 'market/css/one_product_view.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<h1>{{one_product.product_name}}</h1>
+<img src="{{one_product.product_image.url}}" width="500px" height="420px"/><br>
+<span>{{one_product.product_price}}$</span><br>
+<span>Описание:</span><br>
+<span>{{one_product.product_description}}</span><br>
+<span>Производитель:</span><br>
+<span>{{one_product.product_manufacturer}}</span><br>
+{% if one_product.availability %}
+<span>Есть в наличии </span><br>
+{% else %}
+<span>Нет в наличии </span><br>
+{% endif %}
+<span>Категория: </span><span>{{one_product.category}}</span><br>
+<span>Sales: </span><span>{{one_product.sales}}</span>
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView
 from market.forms import SearchForm
@@ -36,11 +37,9 @@ class CategoryView(ListView):
     template_name = 'market/category.html'
     paginate_by = 25
     context_object_name = 'category_list'
-    name_url = 'cats_view'
 
     def get_queryset(self):
         slug = self.kwargs["slug"]
-        print(slug)
         queryset = Product.objects.filter(category__slug=slug)
         return queryset
 
@@ -49,6 +48,24 @@ class CategoryView(ListView):
         slug = self.kwargs["slug"]
         cat = Category.objects.get(slug=slug)
         context['name_category'] = cat
-        context['form_search_val'] = self.name_url
         context['category'] = Category.objects.all()
         return context
+
+
+class OneProductView(ListView):
+    template_name = 'market/one_product_view.html'
+    context_object_name = 'one_product'
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        try:
+            queryset = Product.objects.get(slug=slug)
+        except Exception:
+            return redirect('/')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(OneProductView, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
