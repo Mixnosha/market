@@ -38,7 +38,7 @@
   <button onclick="myFunction()" class="dropbtn">Category</button>
   <div id="myDropdown" class="dropdown-content">
     {% for cat in category %}
-    <a href="category/{{cat.slug}}">{{cat}}</a>
+    <a href="/category/{{cat.slug}}">{{cat}}</a>
     {% endfor %}
   </div>
 </div>

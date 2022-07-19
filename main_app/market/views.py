@@ -17,7 +17,10 @@ class ProductView(ListView, View):
             text_search = self.request.GET.get('text_search')
             queryset = Product.objects.filter(product_name__icontains=text_search)
         else:
-            queryset = Product.objects.filter(sales__gte=100)
+            try:
+                queryset = Product.objects.filter(sales__gte=100)
+            except Exception:
+                queryset = Product.objects.all()
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -47,4 +50,5 @@ class CategoryView(ListView):
         cat = Category.objects.get(slug=slug)
         context['name_category'] = cat
         context['form_search_val'] = self.name_url
+        context['category'] = Category.objects.all()
         return context
