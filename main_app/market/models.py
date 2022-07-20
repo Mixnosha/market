@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -45,4 +46,10 @@ class Manufacturer(models.Model):
         return self.manufacturer_name
 
 
+class Profile(models.Model):
+    profile_image = models.ImageField(upload_to='users/profile_images', blank=True, default='users/profile_images/default.jpg')
+    user_age = models.IntegerField()
+    country = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
 

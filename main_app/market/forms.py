@@ -8,6 +8,7 @@ class SearchForm(forms.Form):
 
 
 class RegisterUserForms(UserCreationForm):
+    profile_image = forms.ImageField()
     username = forms.CharField(label='username', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password1 = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'class': 'form_input'}))
     password2 = forms.CharField(label='repeat password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
