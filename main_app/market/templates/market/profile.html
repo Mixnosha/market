@@ -7,9 +7,11 @@
 {% block content %}
 
 {% if prof %}
+<img src="{{profile.profile_image.url}}" width="200px" height="120px"/><br>
+<label>{{user.username}}</label>
 {% else %}
 <label>Предлагаем заполнить необходимые данные</label><br>
-<form method="post" action="{% url 'addprofileinfo' %}">
+<form method="post" action="{% url 'profile' %}">
         {% csrf_token %}
         <input type="hidden" name="username" maxlength="255" required id="id_username" value="{{username}}"><br>
         <input type="file" name="profile_image" accept="image/*" id="id_profile_image"><br>

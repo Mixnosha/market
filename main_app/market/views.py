@@ -103,6 +103,12 @@ class ProfileView(ListView):
     template_name = 'market/profile.html'
     context_object_name = 'profile'
 
+    def post(self, request, **kwargs):
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+
     def get_queryset(self):
         if self.request.user.is_authenticated:
             try:
@@ -128,11 +134,4 @@ class ProfileView(ListView):
         context['username'] = username
         return context
 
-
-class AddProfileInfo(View):
-    def post(self, request, **kwargs):
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
 
