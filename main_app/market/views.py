@@ -75,7 +75,6 @@ class OneProductView(ListView):
 class RegisterUser(CreateView):
     form_class = RegisterUserForms
     template_name = 'registration/register.html'
-    success_url = 'rock'
     context_object_name = 'form'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -125,7 +124,15 @@ class ProfileView(ListView):
             context['prof'] = False
         context['title'] = 'profile'
         context['form'] = ProfileForm()
+        username = self.request.user.username
+        context['username'] = username
         return context
 
 
+class AddProfileInfo(View):
+    def post(self, request, **kwargs):
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
 

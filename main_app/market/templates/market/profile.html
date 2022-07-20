@@ -5,15 +5,19 @@
         <link type="text/css"  href="{% static 'market/css/profile.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+
 {% if prof %}
 {% else %}
 <label>Предлагаем заполнить необходимые данные</label><br>
-<form method="post" action="{% url 'profile' %}">
-        {% for f in form %}
-                <p><label for="{{ f.id_for_label }}" >{{ f.label }}</label>{{f}}</p>
-                <div>{{f.errors}}</div>
-        {% endfor %}
-<input type="submit" value="save">
+<form method="post" action="{% url 'addprofileinfo' %}">
+        {% csrf_token %}
+        <input type="hidden" name="username" maxlength="255" required id="id_username" value="{{username}}"><br>
+        <input type="file" name="profile_image" accept="image/*" id="id_profile_image"><br>
+        <input type="number" name="user_age" required id="id_user_age"><br>
+        <input type="text" name="country" maxlength="255" required id="id_country"><br>
+        <input type="text" name="city" maxlength="255" required id="id_city"><br>
+        <input type="text" name="address" maxlength="255" required id="id_address"><br>
+        <input type="submit" value="save">
 </form>
 {% endif %}
 {% endblock %}
