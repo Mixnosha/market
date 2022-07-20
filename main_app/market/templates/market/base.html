@@ -1,7 +1,7 @@
 {% load static %}
 {% load menu_tag %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -49,6 +49,12 @@
               <input type="submit" name="submit" class="submit" value="Search">
             </form>
           </nav>
+          {% if request.user.is_authenticated %}
+            <div class="navlink"><a style="color: rgba(118, 161, 83, 1)" href="" class="navanim" >{{user.username}}</a></div>
+            {% else %}
+          <a class="navanim" style="color: rgba(118, 161, 83, 1)"  href="{% url 'register' %}">Регистрация</a>
+            <a class="navanim" style="color: rgba(118, 161, 83, 1)" href="{% url 'login' %}">Войти</a>
+            {% endif %}
         </div>
       </div>
     </header>

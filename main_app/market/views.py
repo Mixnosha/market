@@ -1,7 +1,9 @@
+from django.contrib.auth import login
+from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.views import View
-from django.views.generic import ListView
-from market.forms import SearchForm
+from django.views.generic import ListView, CreateView
+from market.forms import SearchForm, RegisterUserForms, LoginUserForm
 from market.models import Product, Category
 
 
@@ -68,4 +70,34 @@ class OneProductView(ListView):
         context = super(OneProductView, self).get_context_data(**kwargs)
         context['category'] = Category.objects.all()
         return context
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterUserForms
+    template_name = 'registration/register.html'
+    success_url = 'rock'
+    context_object_name = 'form'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Register'
+
+        return context
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'registration/login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Login'
+        return context
+
+
 

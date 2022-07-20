@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet"  type="text/css" href="{% static 'registration/css/register.css' %}">
+
+</head>
+<body>
+
+<form class="decor" method="post">
+    {% csrf_token %}
+<div class="form-left-decoration"></div>
+<div class="form-right-decoration"></div>
+<div class="circle"></div>
+<div class="form-inner">
+<h3>Register</h3>
+    <input type="text" placeholder="username" name="username" class="form-input" autofocus required id="id_username">
+    <label class="error_f">{{form.username.errors}}</label>
+    <input type="password" placeholder="password"  name="password1" class="form-input" required id="id_password1">
+    <label class="error_f">{{form.password1.errors}}</label>
+    <input type="password" placeholder="repeat password"  name="password2" class="form-input" required id="id_password2">
+    <label class="error_f">{{form.password2.errors}}</label>
+    <input type="submit" value="Register">
+    <a href="{% url 'login' %}" class="log">Sign in</a>
+</div>
+</form>
+</body>
