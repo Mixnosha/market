@@ -50,7 +50,7 @@
             </form>
           </nav>
           {% if request.user.is_authenticated %}
-            <div class="navlink"><a style="color: rgba(118, 161, 83, 1)" href="" class="navanim" >{{user.username}}</a></div>
+            <div class="navlink"><a style="color: rgba(118, 161, 83, 1)" href="{% url 'profile' %}" class="navanim" >{{user.username}}</a></div>
           {% else %}
             <a class="navanim" style="color: rgba(118, 161, 83, 1)"  href="{% url 'register' %}">Регистрация</a>
             <a class="navanim" style="color: rgba(118, 161, 83, 1)" href="{% url 'login' %}">Войти</a>

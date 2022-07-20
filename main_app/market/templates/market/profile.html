@@ -1,0 +1,19 @@
+{% extends 'market/base.html' %}
+{% load static %}
+
+{% block head %}
+        <link type="text/css"  href="{% static 'market/css/profile.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+{% if prof %}
+{% else %}
+<label>Предлагаем заполнить необходимые данные</label><br>
+<form method="post" action="{% url 'profile' %}">
+        {% for f in form %}
+                <p><label for="{{ f.id_for_label }}" >{{ f.label }}</label>{{f}}</p>
+                <div>{{f.errors}}</div>
+        {% endfor %}
+<input type="submit" value="save">
+</form>
+{% endif %}
+{% endblock %}

@@ -27,7 +27,7 @@ urlpatterns = [
     path('product/<slug:slug>', OneProductView.as_view(), name='one_product'),
     path('register', RegisterUser.as_view(), name='register'),
     path('login', LoginUser.as_view(), name='login'),
-
+    path('profile', ProfileView.as_view(), name='profile'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

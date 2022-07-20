@@ -3,8 +3,8 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView
-from market.forms import SearchForm, RegisterUserForms, LoginUserForm
-from market.models import Product, Category
+from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
+from market.models import Product, Category, Profile
 
 
 class ProductView(ListView, View):
@@ -97,6 +97,34 @@ class LoginUser(LoginView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Login'
+        return context
+
+
+class ProfileView(ListView):
+    template_name = 'market/profile.html'
+    context_object_name = 'profile'
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            try:
+                username = self.request.user.username
+                queryset = Profile.objects.get(username=username)
+            except Exception:
+                queryset = Profile.objects.all()
+        else:
+            return redirect('/')
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            username = self.request.user.username
+            user = Profile.objects.get(username=username)
+            context['prof'] = True
+        except Exception:
+            context['prof'] = False
+        context['title'] = 'profile'
+        context['form'] = ProfileForm()
         return context
 
 

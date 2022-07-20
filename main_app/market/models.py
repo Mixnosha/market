@@ -47,6 +47,7 @@ class Manufacturer(models.Model):
 
 
 class Profile(models.Model):
+    username = models.CharField(max_length=255)
     profile_image = models.ImageField(upload_to='users/profile_images', blank=True, default='users/profile_images/default.jpg')
     user_age = models.IntegerField()
     country = models.CharField(max_length=255)
