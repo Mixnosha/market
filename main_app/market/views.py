@@ -1,6 +1,9 @@
+from datetime import datetime
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
+from django.http import Http404
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView
 from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
@@ -75,16 +78,16 @@ class OneProductView(ListView):
 class RegisterUser(CreateView):
     form_class = RegisterUserForms
     template_name = 'registration/register.html'
-    context_object_name = 'form'
+    success_url = '/'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Register'
-
         return context
 
     def form_valid(self, form):
         user = form.save()
+        Profile.objects.create(user=user)
         login(self.request, user)
         return redirect('/')
 
@@ -103,35 +106,17 @@ class ProfileView(ListView):
     template_name = 'market/profile.html'
     context_object_name = 'profile'
 
-    def post(self, request, **kwargs):
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            try:
-                username = self.request.user.username
-                queryset = Profile.objects.get(username=username)
-            except Exception:
-                queryset = Profile.objects.all()
+            queryset = Profile.objects.get(user=self.request.user)
         else:
             return redirect('/')
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        try:
-            username = self.request.user.username
-            user = Profile.objects.get(username=username)
-            context['prof'] = True
-        except Exception:
-            context['prof'] = False
         context['title'] = 'profile'
-        context['form'] = ProfileForm()
-        username = self.request.user.username
-        context['username'] = username
         return context
+
 
 

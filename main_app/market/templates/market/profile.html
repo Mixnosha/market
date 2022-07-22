@@ -5,21 +5,10 @@
         <link type="text/css"  href="{% static 'market/css/profile.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
-
-{% if prof %}
-<img src="{{profile.profile_image.url}}" width="200px" height="120px"/><br>
-<label>{{user.username}}</label>
-{% else %}
-<label>Предлагаем заполнить необходимые данные</label><br>
-<form method="post" action="{% url 'profile' %}">
-        {% csrf_token %}
-        <input type="hidden" name="username" maxlength="255" required id="id_username" value="{{username}}"><br>
-        <input type="file" name="profile_image" accept="image/*" id="id_profile_image"><br>
-        <input type="number" name="user_age" required id="id_user_age"><br>
-        <input type="text" name="country" maxlength="255" required id="id_country"><br>
-        <input type="text" name="city" maxlength="255" required id="id_city"><br>
-        <input type="text" name="address" maxlength="255" required id="id_address"><br>
-        <input type="submit" value="save">
-</form>
-{% endif %}
+<p><img src="{{profile.profile_image.url}}" height="120px" width="120px"></p>
+<p>{{profile.user.username}}</p>
+<p><span>Day of birth: </span>{{profile.birthday}}<p>
+<p><span>Country: </span>{{profile.country}}<p>
+<p><span>City: </span>{{profile.city}}<p>
+<p><span>Address: </span>{{profile.address}}<p>
 {% endblock %}
