@@ -28,6 +28,7 @@ urlpatterns = [
     path('register', RegisterUser.as_view(), name='register'),
     path('login', LoginUser.as_view(), name='login'),
     path('profile', ProfileView.as_view(), name='profile'),
+    path('basket/', BasketView.as_view(), name='basket'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

@@ -57,3 +57,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Basket(models.Model):
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    status = models.CharField(max_length=255)

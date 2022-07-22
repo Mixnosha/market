@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView
 from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
-from market.models import Product, Category, Profile
+from market.models import Product, Category, Profile, Basket
 
 
 class ProductView(ListView, View):
@@ -128,4 +128,12 @@ class ProfileView(ListView):
         return context
 
 
+class BasketView(ListView):
+    template_name = 'market/basket.html'
+    context_object_name = 'product_basket'
+    model = Basket
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'basket'
+        return context
