@@ -1,9 +1,6 @@
-from datetime import datetime
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
-from django.http import Http404
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView
 from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
@@ -113,9 +110,11 @@ class ProfileView(ListView):
             return redirect('/')
         return queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'profile'
+        if bool(self.request.GET.get('change_profile')):
+            context['change'] = True
         return context
 
 

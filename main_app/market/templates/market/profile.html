@@ -5,10 +5,20 @@
         <link type="text/css"  href="{% static 'market/css/profile.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+{% if not change %}
 <p><img src="{{profile.profile_image.url}}" height="120px" width="120px"></p>
 <p>{{profile.user.username}}</p>
 <p><span>Day of birth: </span>{{profile.birthday}}<p>
 <p><span>Country: </span>{{profile.country}}<p>
 <p><span>City: </span>{{profile.city}}<p>
 <p><span>Address: </span>{{profile.address}}<p>
+        <form method="get" action="{% url 'profile' %}">
+                <input type="submit" value="change">
+                <input type="hidden" name="change_profile" value="True">
+        </form>
+        {% else %}
+        <h1>Change Start</h1>
+        {% endif %}
+
+
 {% endblock %}
