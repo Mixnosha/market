@@ -149,3 +149,14 @@ class BasketView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'basket'
         return context
+
+
+def add_basket(request):
+    if request.method == 'GET':
+        try:
+            user = Profile.objects.get(user=request.user)
+            product = Product.objects.get(id=request.GET.get('add_product_id'))
+            basket = Basket.objects.create(user=user, product=product, status='доставка через 3 дня')
+        except Exception as e:
+            return redirect('/')
+    return redirect('/')
