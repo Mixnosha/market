@@ -6,16 +6,21 @@
 {% endblock %}
 {% block content %}
 {% if not change %}
+<div class="form-left-decoration"></div>
+<div class="form-right-decoration"></div>
+<div class="circle"></div>
+<div class="form-inner">
 <p><img src="{{profile.profile_image.url}}" height="120px" width="120px"></p>
 <p>{{profile.user.username}}</p>
-<p><span>Day of birth: </span>{{profile.birthday}}<p>
-<p><span>Country: </span>{{profile.country}}<p>
-<p><span>City: </span>{{profile.city}}<p>
-<p><span>Address: </span>{{profile.address}}<p>
+<p><label >Day of birth: </label>{{profile.birthday}}<p>
+<p><label>Country: </label>{{profile.country}}<p>
+<p><label>City: </label>{{profile.city}}<p>
+<p><label>Address: </label>{{profile.address}}<p>
         <form method="get" action="{% url 'profile' %}">
                 <input type="submit" value="change">
                 <input type="hidden" name="change_profile" value="True">
         </form>
+    </div>
         {% else %}
 
         <form class="decor" method="post">
