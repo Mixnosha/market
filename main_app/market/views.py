@@ -122,6 +122,7 @@ class ProfileView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'profile'
+        context['category'] = Category.objects.all()
         context['form'] = form = ProfileForm(instance=self.request.user.profile)
         print(form)
         if bool(self.request.GET.get('change_profile')):
@@ -148,17 +149,21 @@ class BasketView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'basket'
+        context['category'] = Category.objects.all()
         return context
 
 
 def add_basket(request):
     if request.method == 'GET':
-        user = Profile.objects.get(user=request.user)
-        product = Product.objects.get(id=request.GET.get('add_product_id'))
-        try:
-            new_amount = Basket.objects.get(user=user, product=product)
-            new_amount.amount = new_amount.amount + 1
-            new_amount.save()
-        except Exception:
+        if request.user.is_authenticated:
+            user = Profile.objects.get(user=request.user)
+            product = Product.objects.get(id=request.GET.get('add_product_id'))
+            try:
+                new_amount = Basket.objects.get(user=user, product=product)
+                new_amount.amount = new_amount.amount + 1
+                new_amount.save()
+            except Exception:
                 Basket.objects.create(user=user, product=product, status='доставка через 3 дня')
+        else:
+            return HttpResponse('Сначало нужно войти')
     return redirect('basket')

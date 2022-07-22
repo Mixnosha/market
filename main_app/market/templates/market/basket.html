@@ -4,11 +4,12 @@
         <link type="text/css"  href="{% static 'market/css/basket.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+{% if request.user.is_authenticated %}
 {% for product in product_basket %}
 <div class="product">
-        <img src="{{product.product.product_image.url}}" width="100px" height="100px"><br>
-        {{product.product.product_name}}<br>
-        {{product.product.product_price}}$<br>
+        <a href="/product/{{product.product.slug}}"><img src="{{product.product.product_image.url}}" width="100px" height="100px"></a><br>
+        <a href="/product/{{product.product.slug}}">{{product.product.product_name}}</a><br>
+        <a href="/product/{{product.product.slug}}">{{product.product.product_price}}$</a><br>
         <label>Amount: </label>{{product.amount}}<br>
         {{product.status}}
         <form method="get" action="{% url 'basket' %}">
@@ -16,6 +17,12 @@
         <input style="background: #e73939; color: white" type="submit" value="Delete">
 </form>
 </div>
-
 {% endfor %}
+{% else %}
+<label>Need to login first</label><br>
+<a style="color: rgba(118, 161, 83, 1)"  href="{% url 'register' %}">Регистрация    </a>
+<a  style="color: rgba(118, 161, 83, 1)" href="{% url 'login' %}">Войти</a>
+{% endif %}
+
+
 {% endblock %}

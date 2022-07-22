@@ -20,4 +20,9 @@
 {% endif %}
 <span>Категория: </span><span>{{one_product.category}}</span><br>
 <span>Sales: </span><span>{{one_product.sales}}</span>
+<form method="get" action="{% url 'add_basket' %}">
+        <input type="hidden"  name="add_product_id" value="{{one_product.id}}">
+        <input style="background: greenyellow; color: black" type="submit" value="Basket">
+            </form>
 {% endblock %}
+
