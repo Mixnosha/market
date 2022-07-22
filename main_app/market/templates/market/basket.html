@@ -4,5 +4,17 @@
         <link type="text/css"  href="{% static 'market/css/basket.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+{% for product in product_basket %}
+<div class="product">
+        <img src="{{product.product.product_image.url}}" width="100px" height="100px"><br>
+        {{product.product.product_name}}<br>
+        {{product.product.product_price}}$<br>
+        {{product.status}}
+        <form method="get" action="{% url 'basket' %}">
+        <input type="hidden"  name="delete_product_id" value="{{product.id}}">
+        <input style="background: #e73939; color: white" type="submit" value="Delete">
+</form>
+</div>
 
+{% endfor %}
 {% endblock %}

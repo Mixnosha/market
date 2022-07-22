@@ -1,0 +1,12 @@
+.product {
+     padding-top: 20px;
+     float: left; /*Задаем обтекание*/
+     line-height: 50px;/*Высота строки +  верт. центрирования текста*/
+     font-size: 20px;
+     background: #3872ab;
+     color: white;
+     margin-top: 60px;
+     width: 320px; /*Фиксируем ширину блока*/
+     margin-right: 10px;
+     text-align: center; /*Центрируем текст по горизонтали*/
+    }

@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, CreateView
 from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
@@ -131,7 +132,18 @@ class ProfileView(ListView):
 class BasketView(ListView):
     template_name = 'market/basket.html'
     context_object_name = 'product_basket'
-    model = Basket
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            if self.request.GET.get('delete_product_id'):
+                id = self.request.GET.get('delete_product_id')
+                del_prod = Basket.objects.get(id=id)
+                del_prod.delete()
+            user = Profile.objects.get(user=self.request.user)
+            queryset = Basket.objects.filter(user=user)
+        else:
+            queryset = Basket.objects.all()
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from market.models import Product, Review, Manufacturer, Category, Profile
+from market.models import Product, Review, Manufacturer, Category, Profile, Basket
 
 admin.site.register(Review)
 admin.site.register(Category)
 admin.site.register(Manufacturer)
+admin.site.register(Basket)
 
 
 @admin.register(Product)
