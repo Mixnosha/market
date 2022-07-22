@@ -17,37 +17,24 @@
                 <input type="hidden" name="change_profile" value="True">
         </form>
         {% else %}
-        <p>{{profile.user.username}}</p>
 
-        <form method="post" action="{% url 'profile' %}">
-                {% csrf_token %}
-                <img src="{{profile.profile_image.url}}" width="100px" height="100px"><br>
-                <input type="file" name="profile_image" accept="image/*" id="id_profile_image"><br>
-
-                {{form.birthday}}<br>
-
-                <input type="text" name="country" value="{{form.country.value}}" maxlength="255" id="id_country"><br>
-
-                <input type="text" name="city" value="{{form.city.value}}" maxlength="255" id="id_city"><br>
-
-                <input type="text" name="address" value="{{form.address.value}}" maxlength="255" id="id_address"><br>
-                        <input type="submit" value="save">
-        </form>
-        {% endif %}
-{% endblock %}
-<form class="decor" method="post">
-    {% csrf_token %}
+        <form class="decor" method="post">
+            {% csrf_token %}
 <div class="form-left-decoration"></div>
 <div class="form-right-decoration"></div>
 <div class="circle"></div>
 <div class="form-inner">
 <h3>Change Profile</h3>
-    <label class="error_f">{{form.non_field_errors}}</label>
-    <input type="text" placeholder="username" name="username" class="form-input" maxlength="150" required id="id_username">
-    <label class="error_f">{{form.username.errors}}</label>
-    <input type="password" placeholder="password" name="password" class="form-input" required id="id_password">
-    <label class="error_f">{{form.password.errors}}</label>
-    <input type="submit" value="Login">
+    <h4>{{profile.user.username}}</h4>
+   <img src="{{profile.profile_image.url}}" width="100px" height="100px"><br>
+                <input type="file" name="profile_image" accept="image/*" id="id_profile_image"><br>
+                {{form.birthday}}<br>
+                {{form.country}}<br>
+                {{form.city}}<br>
+                {{form.address}}<br>
+                <input type="submit" value="save">
 </div>
 </form>
-</body>
+
+        {% endif %}
+{% endblock %}

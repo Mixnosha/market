@@ -29,4 +29,10 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('profile_image', 'birthday', 'country', 'city', 'address')
-        widgets = {"birthday" = forms.DateField(attrs={"class": "form-input" }),}
+        widgets = {
+            'birthday': forms.DateInput(attrs={'class': 'form-input'}),
+            'country': forms.TextInput(attrs={'class': 'form-input'}),
+            'city': forms.TextInput(attrs={'class': 'form-input'}),
+            'address': forms.TextInput(attrs={'class': 'form-input'}),
+
+        }
