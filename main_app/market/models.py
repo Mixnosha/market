@@ -63,6 +63,7 @@ class Basket(models.Model):
     user = models.ForeignKey('Profile', on_delete=models.CASCADE)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     status = models.CharField(max_length=255)
+    amount = models.IntegerField(default=1)
 
     def __str__(self):
         return f'{self.user}  product:   {self.product.product_name}'

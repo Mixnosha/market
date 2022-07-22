@@ -9,6 +9,7 @@
         <img src="{{product.product.product_image.url}}" width="100px" height="100px"><br>
         {{product.product.product_name}}<br>
         {{product.product.product_price}}$<br>
+        <label>Amount: </label>{{product.amount}}<br>
         {{product.status}}
         <form method="get" action="{% url 'basket' %}">
         <input type="hidden"  name="delete_product_id" value="{{product.id}}">

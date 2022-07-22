@@ -153,10 +153,12 @@ class BasketView(ListView):
 
 def add_basket(request):
     if request.method == 'GET':
+        user = Profile.objects.get(user=request.user)
+        product = Product.objects.get(id=request.GET.get('add_product_id'))
         try:
-            user = Profile.objects.get(user=request.user)
-            product = Product.objects.get(id=request.GET.get('add_product_id'))
-            basket = Basket.objects.create(user=user, product=product, status='доставка через 3 дня')
-        except Exception as e:
-            return redirect('/')
-    return redirect('/')
+            new_amount = Basket.objects.get(user=user, product=product)
+            new_amount.amount = new_amount.amount + 1
+            new_amount.save()
+        except Exception:
+                Basket.objects.create(user=user, product=product, status='доставка через 3 дня')
+    return redirect('basket')
