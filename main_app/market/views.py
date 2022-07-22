@@ -122,6 +122,7 @@ class ProfileView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'profile'
         context['form'] = form = ProfileForm(instance=self.request.user.profile)
+        print(form)
         if bool(self.request.GET.get('change_profile')):
             context['change'] = True
         return context
