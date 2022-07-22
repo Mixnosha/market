@@ -103,6 +103,14 @@ class ProfileView(ListView):
     template_name = 'market/profile.html'
     context_object_name = 'profile'
 
+    def post(self, request):
+        form = ProfileForm(instance=request.user.profile, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        else:
+            return redirect('/')
+
     def get_queryset(self):
         if self.request.user.is_authenticated:
             queryset = Profile.objects.get(user=self.request.user)
@@ -113,6 +121,7 @@ class ProfileView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'profile'
+        context['form'] = form = ProfileForm(instance=self.request.user.profile)
         if bool(self.request.GET.get('change_profile')):
             context['change'] = True
         return context

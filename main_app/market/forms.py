@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
+from main_app import settings
 from market.models import Profile
 
 
@@ -27,4 +28,4 @@ class LoginUserForm(AuthenticationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = '__all__'
+        fields = ('profile_image', 'birthday', 'country', 'city', 'address')

@@ -17,8 +17,23 @@
                 <input type="hidden" name="change_profile" value="True">
         </form>
         {% else %}
-        <h1>Change Start</h1>
+        <p>{{profile.user.username}}</p>
+
+        <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for f in form %}
+                        <p>{{ f.errors }}</p>
+                        <p>{{ f }}</p>
+                {% endfor %}
+
+                <input type="submit" value="save">
+        </form>
         {% endif %}
 
-
 {% endblock %}
+<!--                <p><img src="{{profile.profile_image.url}}" height="120px" width="120px">{{form.profile_image}}</p>-->
+<!--         <p><span>Day of birth: </span>  <input type="text" name="birthday" id="id_birthday" value="{{profile.birthday}}"></p>-->
+<!--                <p><span>Country: </span> <input type="text"  value="{{profile.country}}" name="country" maxlength="255" id="id_country"></p>-->
+<!--                <p><span>City: </span> <input type="text" value="{{profile.city}}" name="city" maxlength="255" id="id_city">-->
+<!--                <p><span>Address: </span> <input type="text" value="{{profile.address}}" name="address" maxlength="255" id="id_address"></p>-->
