@@ -121,8 +121,10 @@ class ProfileView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = Profile.objects.get(user=self.request.user)
         context['title'] = 'profile'
         context['category'] = Category.objects.all()
+        context['basket_product'] = Basket.objects.filter(user=user)
         context['form'] = form = ProfileForm(instance=self.request.user.profile)
         print(form)
         if bool(self.request.GET.get('change_profile')):

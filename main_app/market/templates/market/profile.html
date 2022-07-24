@@ -39,6 +39,15 @@
                 {{form.address}}<br>
                 <input type="submit" value="save">
 </div>
-</form>
+</form><br>
         {% endif %}
+<label class="label_basket">Товары которые вы уже купили :)</label><br>
+{% for pr_bas in  basket_product %}
+<div class="product">
+<a href="/product/{{pr_bas.product.slug}}"><img src="{{pr_bas.product.product_image.url}}" width="50px" height="50px"></a><br>
+        <a href="/product/{{pr_bas.product.slug}}">{{pr_bas.product.product_name}}</a><br>
+        <label>Amount: </label>{{pr_bas.amount}}<br>
+        {{pr_bas.status}}
+</div>
+{% endfor %}
 {% endblock %}

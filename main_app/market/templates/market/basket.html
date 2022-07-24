@@ -5,6 +5,8 @@
 {% endblock %}
 {% block content %}
 {% if request.user.is_authenticated %}
+<h1>This is your Basket</h1><br>
+<label>Here view your product </label><br>
 {% for product in product_basket %}
 <div class="product">
         <a href="/product/{{product.product.slug}}"><img src="{{product.product.product_image.url}}" width="100px" height="100px"></a><br>
