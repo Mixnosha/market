@@ -47,7 +47,7 @@
 <a href="/product/{{pr_bas.product.slug}}"><img src="{{pr_bas.product.product_image.url}}" width="50px" height="50px"></a><br>
         <a href="/product/{{pr_bas.product.slug}}">{{pr_bas.product.product_name}}</a><br>
         <label>Amount: </label>{{pr_bas.amount}}<br>
-        {{pr_bas.status}}
+        {{pr_bas.delivery.delivery}}
 </div>
 {% endfor %}
 {% endblock %}

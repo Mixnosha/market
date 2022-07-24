@@ -4,8 +4,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, CreateView
+from psycopg2.sql import NULL
+
 from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
-from market.models import Product, Category, Profile, Basket
+from market.models import Product, Category, Profile, Basket, Delivery, BuyProduct
 
 
 class ProductView(ListView, View):
@@ -124,7 +126,7 @@ class ProfileView(ListView):
         user = Profile.objects.get(user=self.request.user)
         context['title'] = 'profile'
         context['category'] = Category.objects.all()
-        context['basket_product'] = Basket.objects.filter(user=user)
+        context['basket_product'] = BuyProduct.objects.filter(user=user)
         context['form'] = form = ProfileForm(instance=self.request.user.profile)
         print(form)
         if bool(self.request.GET.get('change_profile')):
@@ -171,7 +173,7 @@ def add_basket(request):
     return redirect('basket')
 
 
-class BuyProduct(ListView):
+class BuyProductView(ListView):
     template_name = 'market/buy_product.html'
     context_object_name = 'profile'
 
@@ -187,5 +189,22 @@ class BuyProduct(ListView):
         context['product'] = Product.objects.get(id=pr_id)
         return context
 
+
+def buy_product_def(request):
+    deliv = Delivery.objects.get(id=1)
+    pr_id = request.GET.get('change_profile')
+    user = Profile.objects.get(user=request.user)
+    try:
+        product = Product.objects.get(id=pr_id)
+    except Exception:
+        return HttpResponse('Данный продукт уже не продается :(')
+    try:
+        del_bas = Basket.objects.get(user=user, product=product)
+        BuyProduct.objects.create(user=user, product=product, delivery=deliv, amount=del_bas.amount)
+        del_bas.delete()
+    except Exception as es:
+        print(es)
+        return HttpResponse(':(')
+    return redirect('profile')
 
 
