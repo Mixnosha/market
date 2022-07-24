@@ -169,3 +169,23 @@ def add_basket(request):
         else:
             return HttpResponse('Сначало нужно войти')
     return redirect('basket')
+
+
+class BuyProduct(ListView):
+    template_name = 'market/buy_product.html'
+    context_object_name = 'profile'
+
+    def get_queryset(self):
+        queryset = Profile.objects.get(user=self.request.user)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Buy_product'
+        context['category'] = Category.objects.all()
+        pr_id = self.request.GET.get('buy_product_id')
+        context['product'] = Product.objects.get(id=pr_id)
+        return context
+
+
+

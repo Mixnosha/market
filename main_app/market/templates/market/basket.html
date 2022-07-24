@@ -17,7 +17,11 @@
         <form method="get" action="{% url 'basket' %}">
         <input type="hidden"  name="delete_product_id" value="{{product.id}}">
         <input style="background: #e73939; color: white" type="submit" value="Delete">
-</form>
+        </form>
+                <form method="get" action="{% url 'buy_product' %}">
+                <input type="hidden"  name="buy_product_id" value="{{product.product.id}}">
+                <input style="background: green; color: white" type="submit" value="buy">
+                </form>
 </div>
 {% endfor %}
 {% else %}

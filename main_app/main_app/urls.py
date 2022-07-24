@@ -30,6 +30,7 @@ urlpatterns = [
     path('profile', ProfileView.as_view(), name='profile'),
     path('basket/', BasketView.as_view(), name='basket'),
     path('add_basket', add_basket, name='add_basket'),
+    path('buy_product', BuyProduct.as_view(), name='buy_product'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

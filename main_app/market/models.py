@@ -67,3 +67,12 @@ class Basket(models.Model):
 
     def __str__(self):
         return f'{self.user}  product:   {self.product.product_name}'
+
+
+class Delivery(models.Model):
+    delivery = models.CharField(max_length=255)
+
+
+class BuyProduct(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    delivery = models.ForeignKey('Delivery', on_delete=models.CASCADE)
