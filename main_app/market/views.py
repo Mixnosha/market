@@ -10,6 +10,15 @@ from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileFo
 from market.models import Product, Category, Profile, Basket, Delivery, BuyProduct
 
 
+def deliv_delete(request):
+    try:
+        buy_prod = BuyProduct.objects.filter(delivery__delivery='Delivered')
+        buy_prod.delete()
+        return redirect('profile')
+    except Exception:
+        pass
+
+
 class ProductView(ListView, View):
     paginate_by = 100
     context_object_name = 'product_list'
@@ -115,6 +124,7 @@ class ProfileView(ListView):
             return redirect('/')
 
     def get_queryset(self):
+        deliv_delete(self.request)
         if self.request.user.is_authenticated:
             queryset = Profile.objects.get(user=self.request.user)
         else:
