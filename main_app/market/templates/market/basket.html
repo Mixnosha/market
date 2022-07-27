@@ -24,6 +24,7 @@
                 </form>
 </div>
 {% endfor %}
+<label class="buy_all">Buy all: </label>{{all_price}}
 {% else %}
 <label>Need to login first</label><br>
 <a style="color: rgba(118, 161, 83, 1)"  href="{% url 'register' %}">Регистрация    </a>
