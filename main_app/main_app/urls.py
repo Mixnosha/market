@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from market.business_logic import add_basket, buy_product_def
+from market.business_logic import add_basket, buy_product_def, buy_all
 from market.views import *
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('add_basket', add_basket, name='add_basket'),
     path('buy_product', BuyProductView.as_view(), name='buy_product'),
     path('buy_product_def', buy_product_def, name='buy_product_def'),
+    path('buy_all_product', buy_all, name='buy_all_product'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

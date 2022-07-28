@@ -1,6 +1,8 @@
+from itertools import product
+
 from django.http import HttpResponse
-from django.shortcuts import redirect
-from market.models import BuyProduct, Profile, Product, Basket, Delivery
+from django.shortcuts import redirect, render
+from market.models import BuyProduct, Profile, Product, Basket, Delivery, Category
 
 
 def deliv_delete(request):
@@ -61,3 +63,27 @@ def get_amount(request, product):
     return Basket.objects.get(user=Profile.objects.get(user=request.user), product=product).amount
 
 
+def get_all_product_id(request):
+    user = Profile.objects.get(user=request.user)
+    all_product = Basket.objects.filter(user=user)
+    all_product_id = []
+    for product in all_product:
+        all_product_id.append(product.product.id)
+    return all_product_id
+
+
+def buy_all(request):
+    all_product = []
+    for id in get_all_product_id(request):
+        all_product.append(Product.objects.get(id=id))
+    all_amount = {}
+    for product in all_product:
+        all_amount[product.product_name] = (get_amount(request, product))
+    print(all_amount)
+    context = {
+        'title': 'Buy_product',
+        'category': Category.objects.all(),
+        'all_product': all_product,
+        'all_amount': all_amount,
+    }
+    return render(request, 'market/buy_product.html', context=context)

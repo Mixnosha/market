@@ -24,7 +24,10 @@
                 </form>
 </div>
 {% endfor %}
-<label class="buy_all">Buy all: </label>{{all_price}}
+<form method="get" action="{% url 'buy_all_product' %}">
+                <input type="hidden"  name="buy_product_id" value="{{product.product.id}}">
+                <input style="background: green; color: white" type="submit" value="buy all">
+                </form>
 {% else %}
 <label>Need to login first</label><br>
 <a style="color: rgba(118, 161, 83, 1)"  href="{% url 'register' %}">Регистрация    </a>
