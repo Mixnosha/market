@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView
-from market.business_logic import deliv_delete, get_sum_product_price_basket
+from market.business_logic import deliv_delete, get_sum_product_price_basket, get_amount
 from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
 from market.models import Product, Category, Profile, Basket, Delivery, BuyProduct
 
@@ -128,7 +128,6 @@ class ProfileView(ListView):
         context['category'] = Category.objects.all()
         context['basket_product'] = BuyProduct.objects.filter(user=user)
         context['form'] = form = ProfileForm(instance=self.request.user.profile)
-        print(form)
         if bool(self.request.GET.get('change_profile')):
             context['change'] = True
         return context
@@ -140,14 +139,15 @@ class BasketView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            if self.request.GET.get('delete_product_id'):
-                id = self.request.GET.get('delete_product_id')
-                del_prod = Basket.objects.get(id=id)
-                del_prod.delete()
-            user = Profile.objects.get(user=self.request.user)
-            queryset = Basket.objects.filter(user=user)
-        else:
-            queryset = Basket.objects.all()
+            try:
+                if self.request.GET.get('delete_product_id'):
+                    id = self.request.GET.get('delete_product_id')
+                    del_prod = Basket.objects.get(id=id)
+                    del_prod.delete()
+                user = Profile.objects.get(user=self.request.user)
+                queryset = Basket.objects.filter(user=user)
+            except Exception:
+                queryset = Basket.objects.all()
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -171,7 +171,9 @@ class BuyProductView(ListView):
         context['title'] = 'Buy_product'
         context['category'] = Category.objects.all()
         pr_id = self.request.GET.get('buy_product_id')
-        context['product'] = Product.objects.get(id=pr_id)
+        context['product'] = product = Product.objects.get(id=pr_id)
+        context['amount'] = get_amount(self.request, product)
+        context['all_price'] = product.product_price * get_amount(self.request, product)
         return context
 
 
