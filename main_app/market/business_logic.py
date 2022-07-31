@@ -31,19 +31,14 @@ def add_basket(request):
 
 
 def buy_product_def(request):
-    deliv = Delivery.objects.get(id=1)
-    pr_id = request.GET.get('change_profile')
+    all_product = []
+    for id in get_all_product_id(request):
+        all_product.append(Product.objects.get(id=id))
+    delivery = Delivery.objects.get(id=1)
     user = Profile.objects.get(user=request.user)
-    try:
-        product = Product.objects.get(id=pr_id)
-    except Exception:
-        return HttpResponse('Данный продукт уже не продается :(')
-    try:
-        del_bas = Basket.objects.get(user=user, product=product)
-        BuyProduct.objects.create(user=user, product=product, delivery=deliv, amount=del_bas.amount)
-        del_bas.delete()
-    except Exception as es:
-        return HttpResponse(':(')
+    for product in all_product:
+        amount = get_amount(request, product)
+        BuyProduct.objects.create(user=user, product=product, delivery=delivery, amount=amount)
     return redirect('profile')
 
 
