@@ -39,6 +39,8 @@ def buy_product_def(request):
     for product in all_product:
         amount = get_amount(request, product)
         BuyProduct.objects.create(user=user, product=product, delivery=delivery, amount=amount)
+        delete = Basket.objects.get(user=user, product=product)
+        delete.delete()
     return redirect('profile')
 
 
@@ -58,6 +60,13 @@ def get_amount(request, product):
     return Basket.objects.get(user=Profile.objects.get(user=request.user), product=product).amount
 
 
+def get_all_amount(request, all_product):
+    all_amount = {}
+    for product in all_product:
+        all_amount[product.product_name] = (get_amount(request, product))
+    return all_amount
+
+
 def get_all_product_id(request):
     user = Profile.objects.get(user=request.user)
     all_product = Basket.objects.filter(user=user)
@@ -71,9 +80,7 @@ def buy_all(request):
     all_product = []
     for id in get_all_product_id(request):
         all_product.append(Product.objects.get(id=id))
-    all_amount = {}
-    for product in all_product:
-        all_amount[product.product_name] = (get_amount(request, product))
+    all_amount = get_all_amount(request, all_product)
     all_price = 0
     for p in all_product:
         all_price += p.product_price * all_amount[p.product_name]

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView
-from market.business_logic import deliv_delete, get_sum_product_price_basket, get_amount
+from market.business_logic import deliv_delete, get_sum_product_price_basket, get_amount, get_all_amount
 from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
 from market.models import Product, Category, Profile, Basket, Delivery, BuyProduct
 
@@ -165,9 +165,12 @@ class BuyProductView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Buy_product'
         pr_id = self.request.GET.get('buy_product_id')
-        context['product'] = product = Product.objects.get(id=pr_id)
-        context['amount'] = get_amount(self.request, product)
-        context['all_price'] = product.product_price * get_amount(self.request, product)
+        context['all_product'] = all_product = Product.objects.filter(id=pr_id)
+        context['all_amount'] =all_amount = get_all_amount(self.request, all_product)
+        all_price = 0
+        for p in all_product:
+            all_price += p.product_price * all_amount[p.product_name]
+        context['all_price'] = all_price
         return context
 
 
