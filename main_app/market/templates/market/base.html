@@ -1,5 +1,6 @@
 {% load static %}
 {% load menu_tag %}
+
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
@@ -19,6 +20,7 @@
   </head>
   <body>
   <div class="screen">
+    {% getcats as cats%}
     {% getmenu as menu %}
     {% block mainmenu %}
 <header class="header">
@@ -37,7 +39,7 @@
             <div class="dropdown">
   <button onclick="myFunction()" class="dropbtn">Category</button>
   <div id="myDropdown" class="dropdown-content">
-    {% for cat in category %}
+    {% for cat in cats %}
     <a href="/category/{{cat.slug}}">{{cat}}</a>
     {% endfor %}
   </div>

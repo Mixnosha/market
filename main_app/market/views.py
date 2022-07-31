@@ -33,7 +33,6 @@ class ProductView(ListView, View):
         if self.request.GET:
             context['search'] = True
         context['name_page'] = 'market'
-        context['category'] = Category.objects.all()
         return context
 
 
@@ -52,7 +51,6 @@ class CategoryView(ListView):
         slug = self.kwargs["slug"]
         cat = Category.objects.get(slug=slug)
         context['name_category'] = cat
-        context['category'] = Category.objects.all()
         return context
 
 
@@ -70,7 +68,6 @@ class OneProductView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(OneProductView, self).get_context_data(**kwargs)
-        context['category'] = Category.objects.all()
         return context
 
 
@@ -125,7 +122,6 @@ class ProfileView(ListView):
         context = super().get_context_data(**kwargs)
         user = Profile.objects.get(user=self.request.user)
         context['title'] = 'profile'
-        context['category'] = Category.objects.all()
         context['basket_product'] = BuyProduct.objects.filter(user=user)
         context['form'] = form = ProfileForm(instance=self.request.user.profile)
         if bool(self.request.GET.get('change_profile')):
@@ -154,7 +150,6 @@ class BasketView(ListView):
         context = super().get_context_data(**kwargs)
         context['all_price'] = get_sum_product_price_basket(self.request)
         context['title'] = 'basket'
-        context['category'] = Category.objects.all()
         return context
 
 
@@ -169,7 +164,6 @@ class BuyProductView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Buy_product'
-        context['category'] = Category.objects.all()
         pr_id = self.request.GET.get('buy_product_id')
         context['product'] = product = Product.objects.get(id=pr_id)
         context['amount'] = get_amount(self.request, product)
