@@ -1,14 +1,17 @@
 {% extends 'market/base.html' %}
 {% load static %}
+{% load buy_product_tag %}
 {% block head %}
         <link type="text/css"  href="{% static 'market/css/buy_product.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
 {% for obj in all_product %}
+{% get_amount all_amount=all_amount obj=obj  as amount %}
  <a href="/product/{{obj.slug}}"><img src="{{obj.product_image.url}}" width="100px" height="100px"></a><br>
         <a href="/product/{{obj.slug}}">{{obj.product_name}}</a><br>
-        <a href="/product/{{obj.slug}}"> x {{obj.product_price}}$</a><br>
+        <a href="/product/{{obj.slug}}"> {{ amount }} x {{obj.product_price}}$</a><br>
+        <label>{% multiplication amount obj.product_price %}$</label>
 <h3>Товар будет отправлен по этому адресу: </h3>
 <p>{{profile.country}}</p>
 <p>{{profile.city}}</p>
@@ -18,7 +21,7 @@
         <input type="submit" value="change">
         <input  type="hidden" name="change_profile" value="True">
 </form><br>
-<label>Total purchase amount: {{all_price}}</label><br>
+<label>Total purchase amount: {{all_price}}$</label><br>
 <form method="get" action="{% url 'buy_product_def' %}">
          <input style="background: #0aa123" type="submit" value="buy">
          <input  value='{{product.id}}' type="hidden" name="change_profile" value="True">

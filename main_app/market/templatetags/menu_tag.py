@@ -1,5 +1,4 @@
 from django import template
-
 from market.models import Category
 
 register = template.Library()
@@ -18,4 +17,6 @@ def get_categories():
 @register.simple_tag(name='getmenu')
 def get_menu():
     return menu
+
+
 

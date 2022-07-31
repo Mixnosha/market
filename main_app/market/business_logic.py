@@ -79,11 +79,13 @@ def buy_all(request):
     all_amount = {}
     for product in all_product:
         all_amount[product.product_name] = (get_amount(request, product))
-    print(all_amount)
+    all_price = 0
+    for p in all_product:
+        all_price += p.product_price * all_amount[p.product_name]
     context = {
         'title': 'Buy_product',
-        'category': Category.objects.all(),
         'all_product': all_product,
         'all_amount': all_amount,
+        'all_price': all_price
     }
     return render(request, 'market/buy_product.html', context=context)
