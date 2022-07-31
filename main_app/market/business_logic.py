@@ -84,10 +84,12 @@ def buy_all(request):
     all_price = 0
     for p in all_product:
         all_price += p.product_price * all_amount[p.product_name]
+    profile = Profile.objects.get(user=request.user)
     context = {
         'title': 'Buy_product',
         'all_product': all_product,
         'all_amount': all_amount,
-        'all_price': all_price
+        'all_price': all_price,
+        'profile': profile,
     }
     return render(request, 'market/buy_product.html', context=context)

@@ -149,6 +149,12 @@ class BasketView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['all_price'] = get_sum_product_price_basket(self.request)
+        try:
+            bas = Basket.objects.filter(user=Profile.objects.get(user=self.request.user))
+            if bas:
+                context['buy_all'] = True
+        except Exception:
+            context['buy_all'] = False
         context['title'] = 'basket'
         return context
 
