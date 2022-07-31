@@ -1,20 +1,19 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView
-from market.business_logic import deliv_delete, get_sum_product_price_basket, get_amount, get_all_amount
-from market.forms import SearchForm, RegisterUserForms, LoginUserForm, ProfileForm
-from market.models import Product, Category, Profile, Basket, Delivery, BuyProduct
+from market.business_logic import get_sum_product_price_basket,  get_all_amount, \
+    get_delivered_product
+from market.forms import RegisterUserForms, LoginUserForm, ProfileForm
+from market.models import Product, Category, Profile, Basket, BuyProduct
 
 
 class ProductView(ListView, View):
     paginate_by = 100
     context_object_name = 'product_list'
-    form_class = SearchForm
     template_name = 'market/main_page.html'
-    name_url = 'main_page'
     success_url = '/'
 
     def get_queryset(self):
@@ -111,7 +110,6 @@ class ProfileView(ListView):
             return redirect('/')
 
     def get_queryset(self):
-        deliv_delete(self.request)
         if self.request.user.is_authenticated:
             queryset = Profile.objects.get(user=self.request.user)
         else:
@@ -122,8 +120,9 @@ class ProfileView(ListView):
         context = super().get_context_data(**kwargs)
         user = Profile.objects.get(user=self.request.user)
         context['title'] = 'profile'
-        context['basket_product'] = BuyProduct.objects.filter(user=user)
-        context['form'] = form = ProfileForm(instance=self.request.user.profile)
+        context['delivered_product'] = get_delivered_product(self.request)
+        context['basket_product'] = BuyProduct.objects.filter(Q(user=user), ~Q(delivery__delivery='Delivered'))
+        context['form'] = ProfileForm(instance=self.request.user.profile)
         if bool(self.request.GET.get('change_profile')):
             context['change'] = True
         return context

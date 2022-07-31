@@ -21,16 +21,27 @@
                 <input type="hidden" name="change_profile" value="True">
         </form>
     </div>
-
-<label class="label_basket">Товары которые вы уже купили :)</label><br>
+{% if  delivered_product %}
+<label class="label_basket">Evaluate the quality of the goods :)</label><br>
+{% for product in  delivered_product %}
+<div class="delivery">
+<a href=""><img src="{{product.product.product_image.url}}" width="50px" height="50px"></a><br>
+        <a href="">{{product.product.product_name}}</a><br>
+        {{product.delivery.delivery}}
+    </div>
+{% endfor %}
+{% endif %}
+<label class="label_basket">Items you have already purchased :)</label><br>
 {% for pr_bas in  basket_product %}
 <div class="product">
 <a href="/product/{{pr_bas.product.slug}}"><img src="{{pr_bas.product.product_image.url}}" width="50px" height="50px"></a><br>
         <a href="/product/{{pr_bas.product.slug}}">{{pr_bas.product.product_name}}</a><br>
         <label>Amount: </label>{{pr_bas.amount}}<br>
         {{pr_bas.delivery.delivery}}
-</div>
+    </div>
 {% endfor %}
+
+
         {% else %}
 
         <form class="decor" method="post">
