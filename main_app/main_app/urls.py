@@ -33,6 +33,7 @@ urlpatterns = [
     path('buy_product', BuyProductView.as_view(), name='buy_product'),
     path('buy_product_def', buy_product_def, name='buy_product_def'),
     path('buy_all_product', buy_all, name='buy_all_product'),
+    path('review/<slug:slug>', Review.as_view(), name='review'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

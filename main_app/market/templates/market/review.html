@@ -1,0 +1,14 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block head %}
+        <link type="text/css"  href="{% static 'market/css/category.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="send">
+</form>
+
+{% endblock %}

@@ -3,10 +3,10 @@ from django.contrib.auth.views import LoginView
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.views import View
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, FormView
 from market.business_logic import get_sum_product_price_basket,  get_all_amount, \
     get_delivered_product
-from market.forms import RegisterUserForms, LoginUserForm, ProfileForm
+from market.forms import RegisterUserForms, LoginUserForm, ProfileForm, ReviewForm
 from market.models import Product, Category, Profile, Basket, BuyProduct
 
 
@@ -179,5 +179,18 @@ class BuyProductView(ListView):
         return context
 
 
+class Review(FormView):
+    template_name = 'market/review.html'
+    form_class = ReviewForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["product"] = Product.objects.get(id=self.request.GET.get('product_id'))
+        return context
 
 

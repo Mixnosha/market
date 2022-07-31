@@ -22,15 +22,22 @@
         </form>
     </div>
 {% if  delivered_product %}
+
 <label class="label_basket">Evaluate the quality of the goods :)</label><br>
+
 {% for product in  delivered_product %}
 <div class="delivery">
-<a href=""><img src="{{product.product.product_image.url}}" width="50px" height="50px"></a><br>
-        <a href="">{{product.product.product_name}}</a><br>
-        {{product.delivery.delivery}}
+<img src="{{product.product.product_image.url}}" width="50px" height="50px"><br>
+    {{product.product.product_name}}<br>
+    <label class="review">Leave feedback</label>
+    <form method="get" action="review/{{product.product.slug}}">
+        <input type="hidden" name="product_id" value="{{product.product.id}}">
+        <input type="submit" value="Yes">
+    </form>
     </div>
 {% endfor %}
 {% endif %}
+
 <label class="label_basket">Items you have already purchased :)</label><br>
 {% for pr_bas in  basket_product %}
 <div class="product">

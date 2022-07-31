@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 from main_app import settings
-from market.models import Profile
+from market.models import Profile, Review
 
 
 class SearchForm(forms.Form):
@@ -36,3 +36,14 @@ class ProfileForm(forms.ModelForm):
             'address': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Address'}),
 
         }
+
+
+class ReviewForm(forms.ModelForm):
+
+    def get_user(self):
+        return self.request.user
+
+    class Meta:
+        model = Review
+        fields = "__all__"
+

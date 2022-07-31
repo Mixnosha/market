@@ -22,14 +22,14 @@ class Review(models.Model):
     RATING_CHOICES = [
         (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)
     ]
-    review_user = models.CharField(max_length=100)
+    review_user = models.ForeignKey('Profile', on_delete=models.CASCADE)
     review_rating = models.IntegerField(choices=RATING_CHOICES)
     review_description = models.TextField(blank=True)
     review_image = models.ImageField(upload_to='users/review_images', blank=True)
     product_review = models.ForeignKey('Product', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.review_user
+        return f'{self.review_user.user.username} : {self.product_review.product_name}'
 
 
 class Category(models.Model):
