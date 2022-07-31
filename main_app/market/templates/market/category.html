@@ -5,12 +5,15 @@
 {% endblock %}
 {% block content %}
     <span class="cat_name">Category: {{name_category}}</span><br>
+{% if category_list %}
     {% for cat in category_list %}
         <div class="product">
             <a href="/product/{{cat.slug}}">{{cat.product_name}}</a><br>
             <a href="/product/{{cat.slug}}"><img src="{{cat.product_image.url}}" width="200px" height="120px"/></a><br>
             <span>{{cat.product_price}}$</span>
-
         </div>
     {% endfor%}
+{% else %}
+<h3 style="color: #e73939">No product in this category</h3>
+{% endif %}
 {% endblock %}
