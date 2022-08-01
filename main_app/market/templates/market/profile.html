@@ -38,6 +38,7 @@
     </div>
 {% endfor %}
 {% endif %}
+{% if basket_product %}
 
 <label class="label_basket">Items you have already purchased :)</label><br>
 {% for pr_bas in  basket_product %}
@@ -48,6 +49,7 @@
         {{pr_bas.delivery.delivery}}
     </div>
 {% endfor %}
+{% endif %}
 
 
         {% else %}

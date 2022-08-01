@@ -5,8 +5,8 @@
 {% endblock %}
 {% block content %}
 <h3>Feedback on the product: </h3>
-{{product.product.product_name}}<br>
-<img src="{{product.product.product_image.url}}" width="100px" height="100px"><br>
+{{product.product_name}}<br>
+<img src="{{product.product_image.url}}" width="100px" height="100px"><br>
 
 <form method="post" action="" class="decor">
     {% csrf_token %}

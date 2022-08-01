@@ -185,13 +185,14 @@ class Review(FormView):
     success_url = '/'
 
     def form_valid(self, form, **kwargs):
+        delete = BuyProduct.objects.get(id=self.request.GET.get('buy_product_id'))
+        delete.delete()
         form.save()
-        print(kwargs)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["product"] = BuyProduct.objects.get(id=self.request.GET.get('buy_product_id'))
+        context["product"] = Product.objects.get(id=self.request.GET.get('product_id'))
         context['user'] = get_user_profile(self.request)
         return context
 
