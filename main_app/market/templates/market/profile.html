@@ -35,6 +35,10 @@
         <input type="hidden" name="buy_product_id" value="{{product.id}}">
         <input type="submit" value="Yes">
     </form>
+    <form method="get" action="{% url 'delete_buy_product' %}">
+        <input type="hidden" name="buy_product_id" value="{{product.id}}">
+        <input type="submit" value="No">
+    </form>
     </div>
 {% endfor %}
 {% endif %}

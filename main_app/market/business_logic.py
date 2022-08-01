@@ -3,6 +3,12 @@ from django.shortcuts import redirect, render
 from market.models import BuyProduct, Profile, Product, Basket, Delivery, Category
 
 
+def delete_buy_product(request):
+    delete = BuyProduct.objects.get(id=request.GET.get('buy_product_id'))
+    delete.delete()
+    return redirect('profile')
+
+
 def get_user_profile(request):
     return Profile.objects.get(user=request.user)
 
