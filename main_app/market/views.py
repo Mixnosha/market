@@ -4,8 +4,8 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView, FormView
-from market.business_logic import get_sum_product_price_basket,  get_all_amount, \
-    get_delivered_product
+from market.business_logic import get_sum_product_price_basket, get_all_amount, \
+    get_delivered_product, get_user_profile
 from market.forms import RegisterUserForms, LoginUserForm, ProfileForm, ReviewForm
 from market.models import Product, Category, Profile, Basket, BuyProduct
 
@@ -184,13 +184,15 @@ class Review(FormView):
     form_class = ReviewForm
     success_url = '/'
 
-    def form_valid(self, form):
+    def form_valid(self, form, **kwargs):
         form.save()
+        print(kwargs)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["product"] = Product.objects.get(id=self.request.GET.get('product_id'))
+        context["product"] = BuyProduct.objects.get(id=self.request.GET.get('buy_product_id'))
+        context['user'] = get_user_profile(self.request)
         return context
 
 

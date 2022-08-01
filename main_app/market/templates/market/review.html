@@ -1,14 +1,36 @@
 {% extends 'market/base.html' %}
 {% load static %}
 {% block head %}
-        <link type="text/css"  href="{% static 'market/css/category.css' %}" rel="stylesheet" />
+        <link type="text/css"  href="{% static 'market/css/review.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+<h3>Feedback on the product: </h3>
+{{product.product.product_name}}<br>
+<img src="{{product.product.product_image.url}}" width="100px" height="100px"><br>
 
-<form method="post" action="">
+<form method="post" action="" class="decor">
     {% csrf_token %}
-    {{form.as_p}}
+    <div class="form-left-decoration"></div>
+<div class="form-right-decoration"></div>
+<div class="circle"></div>
+<div class="form-inner">
+     <label class="error_f">{{form.non_field_errors}}</label>
+      <select style="display: none" name="review_user" required id="id_review_user">
+        <option value="{{user.id}}" selected>{{user}}</option>
+      </select>
+    <label class="text_description">How would you rate</label><br>
+    {{form.review_rating}}<br><br>
+        <label class="error_f">{{form.review_rating.errors}}</label>
+    {{form.review_description}}
+        <label class="error_f">{{form.review_description.errors}}</label>
+    {{form.review_image}}
+        <label class="error_f">{{form.review_image.errors}}</label>
+      <select style="display: none" name="product_review" required id="id_product_review">
+        <option value="{{product.id}}" selected>{{product}}</option>
+      </select>
+
     <input type="submit" value="send">
+    </div>
 </form>
 
 {% endblock %}

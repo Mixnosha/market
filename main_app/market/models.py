@@ -26,10 +26,10 @@ class Review(models.Model):
     review_rating = models.IntegerField(choices=RATING_CHOICES)
     review_description = models.TextField(blank=True)
     review_image = models.ImageField(upload_to='users/review_images', blank=True)
-    product_review = models.ForeignKey('Product', on_delete=models.CASCADE)
+    product_review = models.ForeignKey('BuyProduct', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.review_user.user.username} : {self.product_review.product_name}'
+        return f'{self.review_user.user.username}: {self.product_review.product.product_name}'
 
 
 class Category(models.Model):

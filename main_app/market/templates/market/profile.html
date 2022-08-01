@@ -32,6 +32,7 @@
     <label class="review">Leave feedback</label>
     <form method="get" action="review/{{product.product.slug}}">
         <input type="hidden" name="product_id" value="{{product.product.id}}">
+        <input type="hidden" name="buy_product_id" value="{{product.id}}">
         <input type="submit" value="Yes">
     </form>
     </div>

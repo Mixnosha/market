@@ -39,11 +39,10 @@ class ProfileForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
-
-    def get_user(self):
-        return self.request.user
-
     class Meta:
         model = Review
         fields = "__all__"
+        widgets = {
+            'review_description': forms.Textarea(attrs={'placeholder': 'Description', 'rows': '5'}),
+        }
 
