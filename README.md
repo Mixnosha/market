@@ -4,22 +4,22 @@
 
 ### 🛠 Demo version
   Main page
-![image](readmiimg/img.png)
+![image](readmeimg/img.png)
 
 Producut page
-![img.png](readmiimg/img2.png)
+![img.png](readmeimg/img2.png)
 
 Basket page
-![img_1.png](readmiimg/img_1.png)
+![img.png](readmeimg/img_1.png)
 
 Buy all
-![img_2.png](readmiimg/img_2.png)
+![img.png](readmeimg/img_2.png)
 
 
-![img_3.png](readmiimg/img_3.png)
+![img.png](readmeimg/img_3.png)
 
 Feedback
-![img_4.png](readmiimg/img_4.png)
+![img.png](readmeimg/img_4.png)
 
 
 ### 👷‍♂️Implemented on the site
