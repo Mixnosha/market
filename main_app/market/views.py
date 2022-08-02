@@ -121,12 +121,14 @@ class ProfileView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = Profile.objects.get(user=self.request.user)
-        context['title'] = 'profile'
-        context['delivered_product'] = get_delivered_product(self.request)
-        context['basket_product'] = BuyProduct.objects.filter(Q(user=user), ~Q(delivery__delivery='Delivered'))
-        context['form'] = ProfileForm(instance=self.request.user.profile)
+        context.update({
+            'title': 'profile',
+            'delivered_product': get_delivered_product(self.request),
+            'basket_product': BuyProduct.objects.filter(Q(user=user), ~Q(delivery__delivery='Delivered')),
+            'form': ProfileForm(instance=self.request.user.profile)
+        })
         if bool(self.request.GET.get('change_profile')):
-            context['change'] = True
+            context.update({'change': True})
         return context
 
 

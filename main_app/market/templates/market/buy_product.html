@@ -7,15 +7,21 @@
 
 {% block content %}
 {% for obj in all_product %}
+
+<div class="product">
 {% get_amount all_amount=all_amount obj=obj  as amount %}
  <a href="/product/{{obj.slug}}"><img src="{{obj.product_image.url}}" width="100px" height="100px"></a><br>
         <a href="/product/{{obj.slug}}">{{obj.product_name}}</a><br>
         <a href="/product/{{obj.slug}}"> {{ amount }} x {{obj.product_price}}$</a><br>
         <label>{% multiplication amount obj.product_price %}$</label><br>
+    </div>
 {% endfor %}
+<br><br>
+
+
 <label>Total purchase amount: {{all_price}}$</label><br>
 
-<h3>Товар будет отправлен по этому адресу: </h3>
+<h3>Items will be shipped to this address: </h3>
 <p>{{profile.country}}</p>
 <p>{{profile.city}}</p>
 <p>{{profile.address}}</p>
