@@ -68,7 +68,7 @@ class OneProductView(ListView):
     def get_context_data(self, **kwargs):
         context = super(OneProductView, self).get_context_data(**kwargs)
         product = Product.objects.get(slug=self.kwargs['slug'])
-        context['reviews'] = Review.objects.filter(product_review=product)
+        context['reviews'] = Review.objects.filter(product_review=product)[:3]
         return context
 
 
