@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -16,6 +17,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+    def get_absolute_url(self):
+        return reverse('one_product', kwargs={'slug': self.slug})
 
 
 class Review(models.Model):

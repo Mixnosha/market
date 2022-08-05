@@ -1,12 +1,14 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from market.business_logic import add_basket, buy_product_def, buy_all, delete_buy_product
 from market.views import *
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('feedback/', include('feedback.urls')),
     path('', ProductView.as_view(), name='main_page'),
     path('category/<slug:slug>', CategoryView.as_view(), name='cats_view'),
     path('product/<slug:slug>', OneProductView.as_view(), name='one_product'),

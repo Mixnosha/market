@@ -1,0 +1,15 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block head %}
+        <link type="text/css"  href="{% static 'market/css/FeedbackForProductList.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+    {% for review in reviews %}
+    <div class="product">
+ <img src="{{review.review_user.profile_image.url}}" width="20px" height="20px">{{review.review_user.user.username}} {{review.review_rating}} star<br>
+    {% if review.review_image %}<img src="{{review.review_image.url}}" width="100px" height="100px">{% endif %}
+    {{review.review_description}}
+</div>
+{% endfor %}
+<a href="{{ product.get_absolute_url }}">Back to product </a>
+{% endblock %}
