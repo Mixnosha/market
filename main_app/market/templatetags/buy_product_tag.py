@@ -15,3 +15,7 @@ def multiplication(*args):
         res *= a
     return res
 
+
+@register.simple_tag()
+def data_format(**kwargs):
+    return kwargs['data'].strftime("%d/%m/%Y")
