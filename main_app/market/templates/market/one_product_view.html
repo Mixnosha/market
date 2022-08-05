@@ -31,7 +31,8 @@
 <div class="product">
  <img src="{{review.review_user.profile_image.url}}" width="20px" height="20px">{{review.review_user.user.username}} {{review.review_rating}} star<br>
     {% if review.review_image %}<img src="{{review.review_image.url}}" width="100px" height="100px">{% endif %}
-    {{review.review_description}}
+    <br>{{review.review_description}}<br>
+    {{review.create_data}}
 </div>
 {% endfor %}
 {% endblock %}

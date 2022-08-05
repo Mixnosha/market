@@ -21,7 +21,7 @@ urlpatterns = [
     path('buy_product_def', buy_product_def, name='buy_product_def'),
     path('buy_all_product', buy_all, name='buy_all_product'),
     path('review/<slug:slug>', ReviewView.as_view(), name='review'),
-    path('delete_buy_product', delete_buy_product,name='delete_buy_product')
+    path('delete_buy_product', delete_buy_product, name='delete_buy_product')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

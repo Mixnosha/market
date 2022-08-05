@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView, FormView
@@ -106,11 +107,10 @@ class ProfileView(ListView):
     def post(self, request):
         form = ProfileForm(request.POST, request.FILES or None, instance=request.user.profile)
         if form.is_valid():
-
             form.save()
             return redirect('profile')
         else:
-            return redirect('/')
+            return HttpResponse('Form is valid!')
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -184,21 +184,23 @@ class BuyProductView(ListView):
         return context
 
 
-class ReviewView(FormView):
+class ReviewView(ListView):
     template_name = 'market/review.html'
-    form_class = ReviewForm
-    success_url = '/'
+    queryset = ''
 
-    def form_valid(self, form, **kwargs):
-        delete = BuyProduct.objects.get(id=self.request.GET.get('buy_product_id'))
-        delete.delete()
-        form.save()
-        return super().form_valid(form)
+    def post(self, request, slug):
+        form = ReviewForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            return HttpResponse('Form is valid!')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["product"] = Product.objects.get(id=self.request.GET.get('product_id'))
         context['user'] = get_user_profile(self.request)
+        context['form'] = ReviewForm()
         return context
 
 
