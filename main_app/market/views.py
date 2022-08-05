@@ -104,8 +104,9 @@ class ProfileView(ListView):
     context_object_name = 'profile'
 
     def post(self, request):
-        form = ProfileForm(instance=request.user.profile, data=request.POST, files=request.FILES)
+        form = ProfileForm(request.POST, request.FILES or None, instance=request.user.profile)
         if form.is_valid():
+
             form.save()
             return redirect('profile')
         else:

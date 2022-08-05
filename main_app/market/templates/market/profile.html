@@ -61,7 +61,7 @@
 
         {% else %}
 
-        <form class="decor" method="post">
+        <form class="decor" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 <div class="form-left-decoration"></div>
 <div class="form-right-decoration"></div>
@@ -70,7 +70,7 @@
 <h3>Change Profile</h3>
     <h4>{{profile.user.username}}</h4>
    <img src="{{profile.profile_image.url}}" width="100px" height="100px"><br>
-                <input type="file" name="profile_image" accept="image/*" id="id_profile_image"><br>
+                <input type="file" name="profile_image"  id="id_profile_image"><br>
                 {{form.birthday}}<br>
                 {{form.country}}<br>
                 {{form.city}}<br>
