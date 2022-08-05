@@ -31,7 +31,6 @@ class Review(models.Model):
     review_description = models.TextField(blank=True)
     review_image = models.ImageField(upload_to='users/review_images', blank=True)
     product_review = models.ForeignKey('Product', on_delete=models.CASCADE)
-    create_data = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.review_user.user.username}: {self.product_review.product_name}'

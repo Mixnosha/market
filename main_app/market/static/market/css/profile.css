@@ -139,7 +139,6 @@ h4{
    width: 320px; /*Фиксируем ширину блока*/
    background: #0aa123;
    color: white;
-   float: left; /*Задаем обтекание*/
    padding-top: 20px;
    line-height: 50px;/*Высота строки +  верт. центрирования текста*/
    font-size: 20px;

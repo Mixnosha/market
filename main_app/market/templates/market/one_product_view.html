@@ -1,6 +1,5 @@
 {% extends 'market/base.html' %}
 {% load static %}
-{% load buy_product_tag %}
 
 {% block head %}
   <link type="text/css"  href="{% static 'market/css/one_product_view.css' %}" rel="stylesheet" />
@@ -32,11 +31,8 @@
 <div class="product">
  <img src="{{review.review_user.profile_image.url}}" width="20px" height="20px">{{review.review_user.user.username}} {{review.review_rating}} star<br>
     {% if review.review_image %}<img src="{{review.review_image.url}}" width="100px" height="100px">{% endif %}
-    {{review.review_description}}<br>
-    <label style="font-size: 12px">{% data_format  data=review.create_data %}</label>
+    {{review.review_description}}
 </div>
 {% endfor %}
-<br>
-<a href='/feedback/{{one_product.slug}}'>all feedback</a>
 {% endblock %}
 
