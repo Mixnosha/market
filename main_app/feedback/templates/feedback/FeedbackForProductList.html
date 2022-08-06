@@ -8,7 +8,7 @@
     {% for review in reviews %}
     <div class="product">
  <img src="{{review.review_user.profile_image.url}}" width="20px" height="20px">{{review.review_user.user.username}} {{review.review_rating}} star<br>
-    {% if review.review_image %}<img src="{{review.review_image.url}}" width="100px" height="100px">{% endif %}
+        {% if review.review_image %}<a href="{{review.review_image.url}}"><img src="{{review.review_image.url}}" width="100px" height="100px"></a>{% endif %}
     <br>{{review.review_description}}<br>
         <label style="font-size: 14px">{% format_data data=review.create_data %}</label>
 </div>

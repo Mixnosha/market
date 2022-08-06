@@ -190,8 +190,11 @@ class ReviewView(ListView):
 
     def post(self, request, slug):
         form = ReviewForm(request.POST, request.FILES or None)
+        del_id = request.GET.get('buy_product_id')
+        del_p = BuyProduct.objects.get(id=del_id)
         if form.is_valid():
             form.save()
+            del_p.delete()
             return redirect('/')
         else:
             return HttpResponse('Form is valid!')
