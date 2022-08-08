@@ -85,3 +85,11 @@ class BuyProduct(models.Model):
     def __str__(self):
         return f'{self.user}  buy:   {self.product.product_name}'
 
+class Company(models.Model):
+    name_company = models.CharField(max_length=255)
+    logo = models.ImageField(upload_to=f'company/{name_company}/logo')
+    like_rating = models.IntegerField()
+    location = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name_company
