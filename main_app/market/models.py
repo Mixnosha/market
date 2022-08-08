@@ -54,7 +54,8 @@ class Manufacturer(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='users/profile_images', null=True, blank=True, default='users/profile_images/default.jpg')
+    profile_image = models.ImageField(upload_to='users/profile_images', null=True, blank=True,
+                                      default='users/profile_images/default.jpg')
     birthday = models.DateField(blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
@@ -89,6 +90,7 @@ class BuyProduct(models.Model):
 
     def __str__(self):
         return f'{self.user}  buy:   {self.product.product_name}'
+
 
 class Company(models.Model):
     name_company = models.CharField(max_length=255)

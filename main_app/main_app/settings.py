@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'market.apps.MarketConfig',
     'feedback.apps.FeedbackConfig',
+    'company',
 ]
 
 MIDDLEWARE = [
