@@ -8,7 +8,7 @@
 {{product.product_name}}<br>
 <img src="{{product.product_image.url}}" width="100px" height="100px"><br>
 
-<form method="post" action="" class="decor">
+<form method="post" action="" class="decor" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-left-decoration"></div>
 <div class="form-right-decoration"></div>

@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, CreateView, FormView
@@ -68,7 +69,7 @@ class OneProductView(ListView):
     def get_context_data(self, **kwargs):
         context = super(OneProductView, self).get_context_data(**kwargs)
         product = Product.objects.get(slug=self.kwargs['slug'])
-        context['reviews'] = Review.objects.filter(product_review=product)
+        context['reviews'] = Review.objects.filter(product_review=product)[:3]
         return context
 
 
@@ -104,12 +105,12 @@ class ProfileView(ListView):
     context_object_name = 'profile'
 
     def post(self, request):
-        form = ProfileForm(instance=request.user.profile, data=request.POST, files=request.FILES)
+        form = ProfileForm(request.POST, request.FILES or None, instance=request.user.profile)
         if form.is_valid():
             form.save()
             return redirect('profile')
         else:
-            return redirect('/')
+            return HttpResponse('Form is valid!')
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
@@ -121,12 +122,14 @@ class ProfileView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = Profile.objects.get(user=self.request.user)
-        context['title'] = 'profile'
-        context['delivered_product'] = get_delivered_product(self.request)
-        context['basket_product'] = BuyProduct.objects.filter(Q(user=user), ~Q(delivery__delivery='Delivered'))
-        context['form'] = ProfileForm(instance=self.request.user.profile)
+        context.update({
+            'title': 'profile',
+            'delivered_product': get_delivered_product(self.request),
+            'basket_product': BuyProduct.objects.filter(Q(user=user), ~Q(delivery__delivery='Delivered')),
+            'form': ProfileForm(instance=self.request.user.profile)
+        })
         if bool(self.request.GET.get('change_profile')):
-            context['change'] = True
+            context.update({'change': True})
         return context
 
 
@@ -181,21 +184,26 @@ class BuyProductView(ListView):
         return context
 
 
-class ReviewView(FormView):
+class ReviewView(ListView):
     template_name = 'market/review.html'
-    form_class = ReviewForm
-    success_url = '/'
+    queryset = ''
 
-    def form_valid(self, form, **kwargs):
-        delete = BuyProduct.objects.get(id=self.request.GET.get('buy_product_id'))
-        delete.delete()
-        form.save()
-        return super().form_valid(form)
+    def post(self, request, slug):
+        form = ReviewForm(request.POST, request.FILES or None)
+        del_id = request.GET.get('buy_product_id')
+        del_p = BuyProduct.objects.get(id=del_id)
+        if form.is_valid():
+            form.save()
+            del_p.delete()
+            return redirect('/')
+        else:
+            return HttpResponse('Form is valid!')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["product"] = Product.objects.get(id=self.request.GET.get('product_id'))
         context['user'] = get_user_profile(self.request)
+        context['form'] = ReviewForm()
         return context
 
 
