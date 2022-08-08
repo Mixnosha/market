@@ -13,6 +13,7 @@ class Product(models.Model):
     availability = models.BooleanField(default=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     sales = models.IntegerField()
+    company = models.ForeignKey('Company', on_delete=models.CASCADE)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -97,6 +98,7 @@ class Company(models.Model):
     logo = models.ImageField(upload_to=f'company/{name_company}/logo')
     like_rating = models.IntegerField()
     location = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.name_company

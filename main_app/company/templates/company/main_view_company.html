@@ -1,0 +1,10 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block head %}
+<!--        <link type="text/css"  href="{% static 'market/css/FeedbackForProductList.css' %}" rel="stylesheet" />-->
+{% endblock %}
+{% block content %}
+{% for product in products %}
+{{product}}
+{% endfor %}
+{% endblock %}
