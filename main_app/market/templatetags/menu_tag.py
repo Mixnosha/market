@@ -5,9 +5,10 @@ from market.models import Category
 
 register = template.Library()
 
-menu = [{'title': "About", 'url_name': "/about"},
+menu = [
         {'title': "Contacts", 'url_name': "/contacts"},
         {'title': "Basket", 'url_name': "/basket"},
+        {'title': 'Company', 'url_name': '/company'},
         ]
 
 
