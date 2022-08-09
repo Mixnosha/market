@@ -105,3 +105,11 @@ class Company(models.Model):
 
     def get_absolute_url(self):
         return reverse('company:main_company_view', kwargs={'slug': self.slug})
+
+
+class Favorites(models.Model):
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    products = models.ManyToManyField('Product')
+
+    def __str__(self):
+        return self.user.user.username
