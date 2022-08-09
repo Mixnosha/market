@@ -35,6 +35,7 @@
     <label style="font-size: 14px">{% format_data data=review.create_data %}</label>
 </div>
 {% endfor %}
+<a href="{{company.get_absolute_url}}"><h1>Company {{company.name_company}}</h1></a>
 {% if reviews %}
     <a href="/feedback/{{one_product.slug}}">View all Feedback </a>
 {% endif %}

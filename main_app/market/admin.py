@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 from market.models import *
 
 admin.site.register(Review)
+admin.site.register(Company)
 admin.site.register(Category)
 admin.site.register(Manufacturer)
 admin.site.register(Basket)

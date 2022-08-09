@@ -8,7 +8,7 @@ from django.views.generic import ListView, CreateView, FormView
 from market.business_logic import get_sum_product_price_basket, get_all_amount, \
     get_delivered_product, get_user_profile
 from market.forms import RegisterUserForms, LoginUserForm, ProfileForm, ReviewForm
-from market.models import Product, Category, Profile, Basket, BuyProduct, Review
+from market.models import Product, Category, Profile, Basket, BuyProduct, Review, Company
 
 
 class ProductView(ListView, View):
@@ -70,6 +70,7 @@ class OneProductView(ListView):
         context = super(OneProductView, self).get_context_data(**kwargs)
         product = Product.objects.get(slug=self.kwargs['slug'])
         context['reviews'] = Review.objects.filter(product_review=product)[:3]
+        context['company'] = product.company
         return context
 
 

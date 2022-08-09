@@ -102,3 +102,6 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name_company
+
+    def get_absolute_url(self):
+        return reverse('company:main_company_view', kwargs={'slug': self.slug})
