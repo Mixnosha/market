@@ -13,4 +13,5 @@ class MainViewCompany(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(MainViewCompany, self).get_context_data()
         context['title'] = Company.objects.get(slug=self.kwargs['slug']).name_company
+        context['company'] = Company.objects.get(slug=self.kwargs['slug'])
         return context
