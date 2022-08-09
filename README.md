@@ -23,6 +23,12 @@ Buy all
 Feedback
 ![img.png](readmeimg/img_4.png)
 
+All company Page
+![img.png](readmeimg/img_5.png)
+
+Company Page
+![img.png](readmeimg/img_6.png)
+
 
 ### 👷‍♂️Implemented on the site
 

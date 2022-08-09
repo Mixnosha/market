@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
-</head>
+{% extends 'market/base.html' %}
+{% load static %}
+{% block head %}
+       <link type="text/css"  href="{% static 'market/css/main_page.css' %}" rel="stylesheet" />
 <style>
     a{
         text-decoration: none;
     }
 
 </style>
-<body>
+{% endblock %}
+{% block content %}
+
+<h1>Company</h1>
   {% for company in all_company %}
   <a href="{{company.get_absolute_url}}"><img src="{{company.logo.url}}"  style="position: absolute" width="100px" height="100px"></a>
   <a href="{{company.get_absolute_url}}"><label style="font-size: 24px; margin-left: 100px; color: black">{{company.name_company}}</label></a>
+    <label style="margin-left: 20px; color: #e73939">rating: {{company.like_rating}}</label>
   <br><br><br><br><br><br><br>
 {% endfor %}
-</body>
-</html>
+
+{% endblock %}
