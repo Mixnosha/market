@@ -58,7 +58,7 @@ git clone https://github.com/Mixnosha/market.git
 cd market/main_app
 python3 -m venv venv
 . venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements
 python manage.py migrate
 docker run -p 6379:6379 -d redis:5
 python manage.py runserver
