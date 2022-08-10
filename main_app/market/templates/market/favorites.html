@@ -4,6 +4,7 @@
         <link type="text/css"  href="{% static 'market/css/category.css' %}" rel="stylesheet" />
 {% endblock %}
 {% block content %}
+<h1> Your favorites product </h1>
    {% for product in favorite_products %}
          <div class="product">
             <a href="/product/{{product.slug}}">{{product.product_name}}</a><br>

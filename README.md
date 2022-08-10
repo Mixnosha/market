@@ -29,7 +29,11 @@ All company Page
 Company Page
 ![img.png](readmeimg/img_6.png)
 
+Favorites product
+![img.png](readmeimg/img_7.png)
 
+Favorites products Page
+![img.png](readmeimg/img_8.png)
 ### 👷‍♂️Implemented on the site
 
 * Registration system
@@ -38,6 +42,8 @@ Company Page
 * Basket
 * Product selection by category
 * Product search by keywords
+* Products are branded
+* Favorite products feature (implemented with websockets and django-channels)
 
 
 😕As you can see, this project lacks a front-end developer.\
