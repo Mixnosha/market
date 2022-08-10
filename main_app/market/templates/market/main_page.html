@@ -7,13 +7,14 @@
 {% endblock %}
 
 {% block content %}
-<input type="text" id="user" value="{{request.user}}">
+<input type="hidden" id="user" value="{{request.user}}">
     {% if not search %}
     <h1 class="hot">HOT</h1><br>
     <span class="description">This includes products whose sales exceed 100</span><br>
     {% else %}
         <span class="search_res">Search results:</span><br>
     {% endif %}
+<div id="send_favorite">
     {% for product in product_list %}
          <div class="product">
             <a href="/product/{{product.slug}}">{{product.product_name}}</a><br>
@@ -24,10 +25,11 @@
         <input type="hidden" id="product_id" name="add_product_id" value="{{product.id}}">
         <input style="background: greenyellow; color: black" type="submit" value="Basket">
             </form>
-             <button type="submit" style="color: #e73939" id="favorite-submit">favorite</button>
+             <input type="submit" style="color: #e73939" id="{{product.slug}}" value="favorite">
+             <label id="added_{{product.slug}}" style="color: #67de2c; display: none">Added</label>
         </div>
     {% endfor %}
-<button type="submit" id="sumbit">dum</button>
+    </div>
 {% if text_search %}
 <h1>{{text_search}}</h1>
 {% endif %}
@@ -39,9 +41,9 @@
         );
  chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            console.log(data);
-            if (data){
-                document.querySelector("#favorite-submit").innerHTML = 'send';
+            if (data.sus){
+                document.querySelector(`#${data.pr_slug}`).style.display = 'none';
+                document.querySelector(`#added_${data.pr_slug}`).style.display = 'block'
             }
             else{
                 document.querySelector("#favorite-submit").innerHTML = 'false';
@@ -51,20 +53,14 @@
         chatSocket.onclose = function() {
             console.error('Chat socket closed unexpectedly');
         };
-
-        document.querySelector('#favorite-submit').onclick = function() {
-            console.log('dsdsddsdsd');
-            const product_id_input = document.querySelector('#product_id');
-            const id = product_id_input.value;
-            chatSocket.send(JSON.stringify({
-                'product_id': id,
+        document.querySelector('#send_favorite').addEventListener('click', function(e){
+        var pr_slug = e.target.id;
+        chatSocket.send(JSON.stringify({
+                'product_slug': pr_slug,
                 'user': document.querySelector('#user').value,
             }));
-            product_id_input.value = '';
-        };
-        document.querySelector("#sumbit").onclick = function (){
-            alert('ffddfdffdfdf');
-        }
+
+        });
 </script>
 {% endblock %}
 
