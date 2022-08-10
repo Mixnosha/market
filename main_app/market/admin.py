@@ -5,6 +5,7 @@ from market.models import *
 
 admin.site.register(Review)
 admin.site.register(Company)
+admin.site.register(Favorites)
 admin.site.register(Category)
 admin.site.register(Manufacturer)
 admin.site.register(Basket)

@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+<input type="text" id="user" value="{{request.user}}">
     {% if not search %}
     <h1 class="hot">HOT</h1><br>
     <span class="description">This includes products whose sales exceed 100</span><br>
@@ -20,13 +21,50 @@
              <a href="/product/{{product.slug}}"><span>{{product.product_price}}$</span></a><br>
              <span>sales: {{product.sales}}</span>
              <form method="get" action="{% url 'add_basket' %}">
-        <input type="hidden"  name="add_product_id" value="{{product.id}}">
+        <input type="hidden" id="product_id" name="add_product_id" value="{{product.id}}">
         <input style="background: greenyellow; color: black" type="submit" value="Basket">
             </form>
+             <button type="submit" style="color: #e73939" id="favorite-submit">favorite</button>
         </div>
     {% endfor %}
-
+<button type="submit" id="sumbit">dum</button>
 {% if text_search %}
 <h1>{{text_search}}</h1>
 {% endif %}
+<script>
+ const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/favorite/'
+        );
+ chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            console.log(data);
+            if (data){
+                document.querySelector("#favorite-submit").innerHTML = 'send';
+            }
+            else{
+                document.querySelector("#favorite-submit").innerHTML = 'false';
+            }
+        };
+
+        chatSocket.onclose = function() {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#favorite-submit').onclick = function() {
+            console.log('dsdsddsdsd');
+            const product_id_input = document.querySelector('#product_id');
+            const id = product_id_input.value;
+            chatSocket.send(JSON.stringify({
+                'product_id': id,
+                'user': document.querySelector('#user').value,
+            }));
+            product_id_input.value = '';
+        };
+        document.querySelector("#sumbit").onclick = function (){
+            alert('ffddfdffdfdf');
+        }
+</script>
 {% endblock %}
+

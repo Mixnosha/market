@@ -109,7 +109,7 @@ class Company(models.Model):
 
 class Favorites(models.Model):
     user = models.ForeignKey('Profile', on_delete=models.CASCADE)
-    products = models.ManyToManyField('Product')
+    products = models.ManyToManyField('Product', null=True)
 
     def __str__(self):
         return self.user.user.username
