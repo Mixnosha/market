@@ -50,6 +50,7 @@ Favorites products Page
 I always welcome your suggestions.\
 My mail: xmixho@gmail.com
 
+!!! You must have docker installed to use this project.
 ### ⚙️Project setup
 
 ```
@@ -57,5 +58,6 @@ git clone https://github.com/Mixnosha/market.git
 cd market/main_app
 pip install -r requirements.txt
 python manage.py migrate
+docker run -p 6379:6379 -d redis:5
 python manage.py runserver
 ```
