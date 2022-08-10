@@ -1,0 +1,20 @@
+{% extends 'market/base.html' %}
+{% load static %}
+{% block head %}
+        <link type="text/css"  href="{% static 'market/css/category.css' %}" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+   {% for product in favorite_products %}
+         <div class="product">
+            <a href="/product/{{product.slug}}">{{product.product_name}}</a><br>
+            <a href="/product/{{product.slug}}"><img src="{{product.product_image.url}}" width="200px" height="120px"/></a><br>
+             <a href="/product/{{product.slug}}"><span>{{product.product_price}}$</span></a><br>
+             <span>sales: {{product.sales}}</span>
+             <form method="get" action="{% url 'add_basket' %}">
+        <input type="hidden" id="product_id" name="add_product_id" value="{{product.id}}">
+        <input style="background: greenyellow; color: black" type="submit" value="Basket">
+            </form>
+             
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -8,7 +8,7 @@ from django.views.generic import ListView, CreateView, FormView
 from market.business_logic import get_sum_product_price_basket, get_all_amount, \
     get_delivered_product, get_user_profile
 from market.forms import RegisterUserForms, LoginUserForm, ProfileForm, ReviewForm
-from market.models import Product, Category, Profile, Basket, BuyProduct, Review, Company
+from market.models import Product, Category, Profile, Basket, BuyProduct, Review, Company, Favorites
 
 
 class ProductView(ListView, View):
@@ -127,7 +127,8 @@ class ProfileView(ListView):
             'title': 'profile',
             'delivered_product': get_delivered_product(self.request),
             'basket_product': BuyProduct.objects.filter(Q(user=user), ~Q(delivery__delivery='Delivered')),
-            'form': ProfileForm(instance=self.request.user.profile)
+            'form': ProfileForm(instance=self.request.user.profile),
+            'favorites': Favorites.objects.get(user=user),
         })
         if bool(self.request.GET.get('change_profile')):
             context.update({'change': True})
@@ -207,4 +208,14 @@ class ReviewView(ListView):
         context['form'] = ReviewForm()
         return context
 
+class FavoritesView(ListView):
+    template_name = 'market/favorites.html'
+    context_object_name = 'favorite_products'
 
+    def get_queryset(self):
+        return Favorites.objects.get(user__user=self.request.user).products.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(FavoritesView, self).get_context_data()
+        context["title"] = 'favorites'
+        return context

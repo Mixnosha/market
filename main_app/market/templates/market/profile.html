@@ -18,12 +18,13 @@
 <p><label>Country: </label>{{profile.country}}<p>
 <p><label>City: </label>{{profile.city}}<p>
 <p><label>Address: </label>{{profile.address}}<p>
-
+<p><label><a style="color: #e73939" href="{{favorites.get_absolute_url}}">favorite product</a></label></p>
 
                 <input type="submit" value="change">
                 <input type="hidden" name="change_profile" value="True">
-        </form>
     </div>
+        </form>
+
 {% if  delivered_product %}
 
 <label class="label_basket">Evaluate the quality of the goods :)</label><br>

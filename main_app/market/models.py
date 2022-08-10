@@ -113,3 +113,6 @@ class Favorites(models.Model):
 
     def __str__(self):
         return self.user.user.username
+
+    def get_absolute_url(self):
+        return reverse('favorites', kwargs={'slug': self.user.user.username})

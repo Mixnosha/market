@@ -12,6 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('feedback/', include('feedback.urls')),
     path('company/', include('company.urls')),
+    path('favorites/<slug:slug>', FavoritesView.as_view(), name='favorites'),
     path('', ProductView.as_view(), name='main_page'),
     path('category/<slug:slug>', CategoryView.as_view(), name='cats_view'),
     path('product/<slug:slug>', OneProductView.as_view(), name='one_product'),
